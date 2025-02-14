@@ -43,10 +43,12 @@
             width: 100%;
             height: auto;
             border-radius: 10px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, filter 0.3s;
+            filter: grayscale(100%);
         }
         .grid img:hover {
             transform: scale(1.05);
+            filter: grayscale(0%);
         }
         .footer {
             padding: 20px;
