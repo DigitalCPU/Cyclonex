@@ -9,25 +9,47 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0a0a0a;
-            color: white;
+            background: url('cyclosphere 003.svg') no-repeat center center fixed;
+            background-size: cover;
+            color: #00FF00;
             text-align: center;
+            overflow: hidden;
+        }
+        .overlay {
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
         .header {
+            width: 100%;
             padding: 20px;
             background: #111;
-            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .header img {
+            width: 100%;
+            max-height: 150px;
+            object-fit: cover;
         }
         .content {
-            margin: 20px;
-            padding: 20px;
-            background: #222;
-            border-radius: 10px;
+            max-width: 800px;
+            text-align: justify;
+            font-size: 18px;
         }
         .footer {
             padding: 20px;
             background: #111;
-            margin-top: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
         a {
             color: cyan;
@@ -36,16 +58,38 @@
     </style>
 </head>
 <body>
-    <div class="header">Cyclosphere</div>
-    <div class="content">
-        <p>Welcome to the <strong>Cyclosphere</strong> page. More information coming soon.</p>
-        <a href="./index.html">Back to Home</a>
+    <div class="header">
+        <img src="cyclosphere 002.svg" alt="Cyclosphere Logo">
+    </div>
+    <div class="overlay">
+        <div class="content">
+            <h1>Cyclosphere - The Future of Digital Infrastructure</h1>
+            <p>
+                Cyclosphere is the core of CycloNex's technological ecosystem, designed to revolutionize how digital services interact. 
+                It is a next-generation **cloud operating system** that integrates **AI-powered automation, decentralized data security, 
+                and real-time adaptability** to create a seamless, interconnected experience for users and businesses.
+            </p>
+            <p>
+                **Vision & Goals:**
+                <ul>
+                    <li>🔹 Create an independent, **cloud-based OS** that operates beyond traditional platforms.</li>
+                    <li>🔹 Develop an **AI-driven environment** capable of learning and evolving with user needs.</li>
+                    <li>🔹 Establish a **decentralized infrastructure** to ensure privacy, security, and full data sovereignty.</li>
+                    <li>🔹 Integrate **holographic and immersive VR interfaces** for an unparalleled user experience.</li>
+                    <li>🔹 Build a system that can power everything from **corporate networks to futuristic smart cities.**</li>
+                </ul>
+            </p>
+            <p>
+                Cyclosphere isn’t just a product—it’s a movement towards a **limitless, AI-augmented digital frontier.**
+            </p>
+            <p><a href="index.html">⬅ Back to Home</a></p>
+        </div>
     </div>
     <div class="footer">
-        <a href="./register.html">Register</a> | 
-        <a href="./contact.html">Contact</a> | 
-        <a href="./jobs.html">Careers</a> | 
-        <a href="./about.html">About Us</a>
+        <a href="register.html">Register</a> | 
+        <a href="contact.html">Contact</a> | 
+        <a href="jobs.html">Careers</a> | 
+        <a href="about.html">About Us</a>
     </div>
 </body>
 </html>
