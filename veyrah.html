@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veyrah - CycloNex</title>
+    <title>CycloNex - Home</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,36 +16,59 @@
         .header {
             padding: 20px;
             background: #111;
-            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
-        .content {
+        .header img {
+            width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+        }
+        .container {
             margin: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ensure the images fit evenly across the screen */
+            gap: 15px;
             padding: 20px;
-            background: #222;
+        }
+        .grid a {
+            text-decoration: none;
+            color: white;
+        }
+        .grid img {
+            width: 25%; /* Resize images to 1/4 of original size */
+            height: auto;
             border-radius: 10px;
+            transition: transform 0.3s, filter 0.3s;
+            filter: grayscale(100%);
+        }
+        .grid img:hover {
+            transform: scale(1.05);
+            filter: grayscale(0%);
         }
         .footer {
             padding: 20px;
             background: #111;
             margin-top: 20px;
         }
-        a {
-            color: cyan;
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
-    <div class="header">Veyrah</div>
-    <div class="content">
-        <p>Welcome to the <strong>Veyrah</strong> page. More information coming soon.</p>
-        <a href="./index.html">Back to Home</a>
+    <div class="header">
+        <img src="cyclonex 001.svg" alt="CycloNex Logo">
     </div>
-    <div class="footer">
-        <a href="./register.html">Register</a> | 
-        <a href="./contact.html">Contact</a> | 
-        <a href="./jobs.html">Careers</a> | 
-        <a href="./about.html">About Us</a>
-    </div>
-</body>
-</html>
+    <div class="container">
+        <p>Welcome to CycloNex, a pioneering force in AI, cybersecurity, and technology.</p>
+        <div class="grid">
+            <a href="cyclosphere.html"><img src="cyclosphere 001.svg" alt="Cyclosphere"></a>
+            <a href="veyrah.html"><img src="veyrah 001.svg" alt="Veyrah"></a>
+            <a href="qwazo.html"><img src="qwazo 001.svg" alt="Qwazo"></a>
+            <a href="halovox.html"><img src="halovox 001.svg" alt="HaloVox"></a>
+            <a href="votronix.html"><img src="votronix 001.svg" alt="Votronix"></a>
+            <a href="lifelike.html"><img src="lifelike 001.svg" alt="LifeLike"></a>
+            <a href="novasearch.html"><img src="novasearch 001.svg" alt="NovaSearch"></a>
+            <a href="quazar.html"><img sr
