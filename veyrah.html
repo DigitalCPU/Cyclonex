@@ -29,24 +29,25 @@
         .container {
             margin: 20px;
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ensure the images fit evenly across the screen */
-            gap: 15px;
+        .image-group {
+            display: flex;
+            justify-content: center; /* Center the images horizontally */
+            flex-wrap: wrap; /* Allow images to wrap into rows */
+            gap: 20px; /* Add spacing between images */
             padding: 20px;
         }
-        .grid a {
+        .image-group a {
             text-decoration: none;
             color: white;
         }
-        .grid img {
+        .image-group img {
             width: 25%; /* Resize images to 1/4 of original size */
             height: auto;
             border-radius: 10px;
             transition: transform 0.3s, filter 0.3s;
             filter: grayscale(100%);
         }
-        .grid img:hover {
+        .image-group img:hover {
             transform: scale(1.05);
             filter: grayscale(0%);
         }
@@ -63,7 +64,8 @@
     </div>
     <div class="container">
         <p>Welcome to CycloNex, a pioneering force in AI, cybersecurity, and technology.</p>
-        <div class="grid">
+        <div class="image-group">
+            <!-- Grouped and centered images -->
             <a href="cyclosphere.html"><img src="cyclosphere 001.svg" alt="Cyclosphere"></a>
             <a href="veyrah.html"><img src="veyrah 001.svg" alt="Veyrah"></a>
             <a href="qwazo.html"><img src="qwazo 001.svg" alt="Qwazo"></a>
@@ -71,4 +73,17 @@
             <a href="votronix.html"><img src="votronix 001.svg" alt="Votronix"></a>
             <a href="lifelike.html"><img src="lifelike 001.svg" alt="LifeLike"></a>
             <a href="novasearch.html"><img src="novasearch 001.svg" alt="NovaSearch"></a>
-            <a href="quazar.html"><img sr
+            <a href="quazar.html"><img src="quazar 001.svg" alt="Quazar"></a>
+            <a href="firenado.html"><img src="firenado 001.svg" alt="Firenado"></a>
+            <a href="argentix.html"><img src="argentix 001.svg" alt="Argentix"></a>
+            <a href="aztech.html"><img src="aztech 001.svg" alt="AZTech"></a>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="register.html">Register</a> | 
+        <a href="contact.html">Contact</a> | 
+        <a href="jobs.html">Careers</a> | 
+        <a href="about.html">About Us</a>
+    </div>
+</body>
+</html>
