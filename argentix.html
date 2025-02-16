@@ -17,6 +17,7 @@
             flex-direction: column;
             min-height: 100vh;
         }
+        
         .header {
             padding: 20px;
             background: #111;
@@ -25,11 +26,13 @@
             justify-content: center;
             overflow: hidden;
         }
+        
         .header img {
             width: 100%;
             max-height: 150px;
             object-fit: cover;
         }
+        
         .container {
             position: relative;
             z-index: 2;
@@ -37,32 +40,46 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 20px;
         }
+        
         .sidebar {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 20px;
+            gap: 15px;
         }
+        
         .sidebar img {
-            width: 25%;
-            margin-bottom: 15px;
+            width: 80px;
             cursor: pointer;
             filter: grayscale(100%);
             transition: filter 0.3s ease, transform 0.3s ease;
         }
+        
         .sidebar img:hover {
             filter: grayscale(0%);
             transform: scale(1.1);
         }
+        
         .content {
-            margin: 20px auto;
+            flex: 1;
+            max-width: 800px;
             padding: 20px;
             background: rgba(34, 34, 34, 0.6);
             border-radius: 10px;
             text-align: left;
-            max-width: 800px;
         }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+        
         .footer {
             padding: 20px;
             background: rgba(17, 17, 17, 0.85);
@@ -70,25 +87,37 @@
             bottom: 0;
             position: relative;
         }
+        
         a {
             color: cyan;
             text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
+
         a:hover {
             color: #00ffff;
             text-shadow: 0px 0px 10px cyan;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
     </style>
     <script>
-        function changeContent(section) {
-            const contentDiv = document.getElementById('content');
-            const sections = {
-                'AGX 01': `<h2>AGX Mining</h2><p>Mining cryptocurrency is the process of validating and adding transactions to a blockchain network...</p>` ,
-                'AGX 02': `<h2>AGX Value</h2><p>Cryptocurrency as a store of value relies on its decentralized nature...</p>` ,
-                'AGX 03': `<h2>AGX Utility Token</h2><p>A utility token is a type of cryptocurrency designed to provide access...</p>` ,
-                'AGX 04': `<h2>Cryptocurrency as Smart Contracts</h2><p>A smart contract is a self-executing program stored on a blockchain...</p>`
-            };
-            contentDiv.innerHTML = sections[section] || '<h2>What is Argentix?</h2><p>Argentix is a cutting-edge cryptocurrency...</p>';
+        function changeContent(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
         }
     </script>
 </head>
@@ -96,24 +125,40 @@
     <div class="header">
         <img src="argentix 001.svg" alt="Argentix header">
     </div>
+    
     <div class="container">
         <div class="sidebar">
-            <img src="agx 01.svg" alt="AGX 01" onclick="changeContent('AGX 01')">
-            <img src="agx 02.svg" alt="AGX 02" onclick="changeContent('AGX 02')">
-            <img src="agx 03.svg" alt="AGX 03" onclick="changeContent('AGX 03')">
-            <img src="agx 04.svg" alt="AGX 04" onclick="changeContent('AGX 04')">
+            <img src="agx 01.svg" alt="AGX Mining" onclick="changeContent('AGX01')">
+            <img src="agx 02.svg" alt="AGX Value" onclick="changeContent('AGX02')">
+            <img src="agx 03.svg" alt="AGX Utility Token" onclick="changeContent('AGX03')">
+            <img src="agx 04.svg" alt="Smart Contracts" onclick="changeContent('AGX04')">
+            <img src="argentix 001.svg" alt="Original Argentix" onclick="changeContent('AGXOriginal')">
         </div>
-        <div class="content" id="content">
-            <h2>What is Argentix?</h2>
-            <p>Argentix is a cutting-edge cryptocurrency developed within the CycloNex ecosystem...</p>
-        </div>
-        <div class="sidebar">
-            <img src="argentix 001.svg" alt="Back to Argentix" onclick="changeContent('')">
-            <a href="https://digitalcpu.github.io/Cyclonex">
-                <img src="cyclonex 001.svg" alt="Back to CycloNex">
-            </a>
+
+        <div class="content">
+            <div id="AGXOriginal" class="content-section active">
+                <h2>What is Argentix?</h2>
+                <p>Argentix is a cutting-edge cryptocurrency developed within the CycloNex ecosystem...</p>
+            </div>
+            <div id="AGX01" class="content-section">
+                <h2>AGX Mining</h2>
+                <p>AGX mining is the process of securing the Argentix blockchain by validating transactions and solving cryptographic puzzles...</p>
+            </div>
+            <div id="AGX02" class="content-section">
+                <h2>AGX Value</h2>
+                <p>Cryptocurrency as a store of value relies on its decentralized nature...</p>
+            </div>
+            <div id="AGX03" class="content-section">
+                <h2>AGX Utility Token</h2>
+                <p>A utility token is a type of cryptocurrency designed to provide access...</p>
+            </div>
+            <div id="AGX04" class="content-section">
+                <h2>Smart Contracts</h2>
+                <p>A smart contract is a self-executing program stored on a blockchain...</p>
+            </div>
         </div>
     </div>
+
     <div class="footer">
         <a href="./register.html">Register</a> | 
         <a href="./contact.html">Contact</a> | 
