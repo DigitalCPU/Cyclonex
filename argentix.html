@@ -17,20 +17,17 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        .header {
-            padding: 20px;
-            background: #111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+        .banner {
+            width: 100%;
+            text-align: center;
+            background: rgba(17, 17, 17, 0.85);
+            padding: 10px 0;
         }
-        .header img {
+        .banner img {
             width: 100%;
             max-height: 150px;
-            object-fit: cover;
+            object-fit: contain;
         }
-        
         .container {
             position: relative;
             z-index: 2;
@@ -57,20 +54,6 @@
             filter: grayscale(0%);
             transform: scale(1.1);
         }
-        .tooltip {
-            display: none;
-            position: absolute;
-            left: 110%;
-            background: rgba(34, 34, 34, 0.85);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            width: 200px;
-            text-align: left;
-        }
-        .sidebar a:hover .tooltip {
-            display: block;
-        }
         .content {
             margin: 20px auto;
             padding: 20px;
@@ -95,36 +78,68 @@
             text-shadow: 0px 0px 10px cyan;
         }
     </style>
+    <script>
+        function changeContent(section) {
+            const contentDiv = document.getElementById('content');
+            
+            const sections = {
+                'AGX 01': `<h2>AGX 01</h2><p>Mining cryptocurrency is the process of validating and adding transactions to a blockchain network while competing to solve complex mathematical puzzles. It involves using computational power to find a cryptographic hash that meets the network's requirements, securing the blockchain and issuing new coins as a reward to miners.  
+
+Here's how it works:  
+
+1. **Transaction Verification** – Miners gather pending transactions from the network and validate them.  
+2. **Block Formation** – These verified transactions are grouped into a block.  
+3. **Proof of Work (PoW) or Other Consensus Mechanisms** – Miners solve a cryptographic puzzle (in PoW systems like Bitcoin) by finding a hash below a certain target. This requires computational power.  
+4. **Block Addition** – The first miner to find the correct hash broadcasts it to the network. If verified by other nodes, the new block is added to the blockchain.  
+5. **Rewards** – The winning miner receives newly minted cryptocurrency and transaction fees as a reward.  
+
+Mining is a way to **decentralize** the verification process and maintain network integrity without a central authority. However, due to increasing difficulty and energy costs, many miners now use **mining pools** to combine computational power and share rewards.</p>` ,
+                'AGX 02': `<h2>AGX 02</h2><p>Advanced smart contract execution with minimal gas fees.</p>` ,
+                'AGX 03': `<h2>AGX 03</h2><p>Energy-efficient mining utilizing hybrid consensus mechanisms.</p>` ,
+                'AGX 04': `<h2>AGX 04</h2><p>Enhanced blockchain security to prevent fraud and cyber threats.</p>`
+            };
+            
+            contentDiv.innerHTML = sections[section] || '<h2>What is Argentix?</h2><p>Argentix is a cutting-edge cryptocurrency developed within the CycloNex ecosystem, designed to power decentralized applications, enable secure transactions, and revolutionize the digital economy through seamless blockchain integration.</p>';
+        }
+    </script>
 </head>
 <body>
-    <div class="header">
-        <img src="argentix 001.svg" alt="Argentix header">
+    <div class="banner">
+        <img src="argentix 001.svg" alt="Argentix Banner">
     </div>
     <div class="container">
         <div class="sidebar">
-            <a href="#"><img src="agx 01.svg" alt="AGX 01"><span class="tooltip">AGX 01: The foundation of our decentralized economy, enabling secure, instant transactions.</span></a>
-            <a href="#"><img src="agx 02.svg" alt="AGX 02"><span class="tooltip">AGX 02: Advanced smart contract execution with minimal gas fees.</span></a>
-            <a href="#"><img src="agx 03.svg" alt="AGX 03"><span class="tooltip">AGX 03: Energy-efficient mining utilizing hybrid consensus mechanisms.</span></a>
-            <a href="#"><img src="agx 04.svg" alt="AGX 04"><span class="tooltip">AGX 04: Enhanced blockchain security to prevent fraud and cyber threats.</span></a>
+            <img src="agx 01.svg" alt="AGX 01" onclick="changeContent('AGX 01')">
+            <img src="agx 02.svg" alt="AGX 02" onclick="changeContent('AGX 02')">
+            <img src="agx 03.svg" alt="AGX 03" onclick="changeContent('AGX 03')">
+            <img src="agx 04.svg" alt="AGX 04" onclick="changeContent('AGX 04')">
         </div>
-        <div class="content">
-            <h2>What is Argentix?</h2>
-            <p>Argentix is a cutting-edge cryptocurrency developed within the CycloNex ecosystem, designed to power decentralized applications, enable secure transactions, and revolutionize the digital economy through seamless blockchain integration.</p>
-            
-            <h2>Smart Contracts</h2>
-            <p>Argentix leverages smart contracts to automate transactions, enforce agreements, and remove intermediaries. These contracts ensure security, transparency, and efficiency, allowing for self-executing agreements that reduce costs and increase trust among users.</p>
-            
-            <h2>Mining</h2>
-            <p>Unlike traditional cryptocurrencies, Argentix implements an energy-efficient mining process using a hybrid consensus mechanism. This approach combines Proof-of-Stake (PoS) and advanced validation techniques to reduce environmental impact while maintaining network security and scalability.</p>
-            
-            <h2>Blockchain Security</h2>
-            <p>Argentix operates on a robust blockchain infrastructure, utilizing state-of-the-art encryption and decentralized validation to prevent fraud and cyber threats. With built-in resistance to quantum computing attacks, Argentix ensures a future-proof foundation for secure transactions.</p>
-            
-            <h2>Utility</h2>
-            <p>Argentix is more than just a cryptocurrency—it is a versatile digital asset used for transactions, smart contract execution, and powering decentralized applications (dApps). As a utility token, it seamlessly integrates into the CycloNex ecosystem, facilitating seamless financial interactions within Cyclosphere.</p>
-            
-            <a href="./index.html">Back to Home</a>
-        </div>
+        <div class="content" id="content">
+    <h2>What is Argentix?</h2>
+    <p>Argentix is a cutting-edge cryptocurrency developed within the CycloNex ecosystem, designed to power decentralized applications, enable secure transactions, and revolutionize the digital economy through seamless blockchain integration.</p>
+    
+    <h2>Here’s a breakdown of the typical functions of blockchain and cryptocurrency:</h2>
+    
+    <h3>Blockchain Functions</h3>
+    <ul>
+        <li><strong>Decentralization:</strong> Blockchain operates on a decentralized network, distributing data across multiple nodes. This reduces the risk of a single point of failure and enhances security.</li>
+        <li><strong>Transparency:</strong> Each transaction on the blockchain is recorded in a public ledger that can be viewed by anyone. This transparency fosters trust among users and allows for easier auditing.</li>
+        <li><strong>Immutability:</strong> Once a transaction is added to the blockchain, it cannot be altered or deleted. This ensures the integrity of the data and provides a reliable history of all transactions.</li>
+        <li><strong>Security:</strong> Advanced cryptographic techniques secure the data on the blockchain. This protects against unauthorized access and fraud, making it a secure method for recording transactions.</li>
+        <li><strong>Smart Contracts:</strong> Blockchain technology can facilitate automated contracts that execute when predefined conditions are met. This reduces the need for intermediaries and streamlines processes.</li>
+    </ul>
+    
+    <h3>Cryptocurrency Functions</h3>
+    <ul>
+        <li><strong>Digital Currency:</strong> Cryptocurrencies serve as a medium of exchange, allowing users to buy goods and services. They provide an alternative to traditional fiat currencies.</li>
+        <li><strong>Store of Value:</strong> Many cryptocurrencies, like Bitcoin, are viewed as a store of value, similar to precious metals. They can act as a hedge against inflation and economic instability.</li>
+        <li><strong>Peer-to-Peer Transactions:</strong> Cryptocurrencies enable direct transactions between users without the need for a financial intermediary, reducing transaction fees and processing times.</li>
+        <li><strong>Microtransactions:</strong> Cryptocurrencies facilitate small transactions that might be impractical with traditional payment methods, opening new possibilities for business models.</li>
+        <li><strong>Tokenization:</strong> Cryptocurrencies can represent ownership of assets, such as real estate or artwork, through tokenization. This process simplifies the transfer of ownership and enhances liquidity.</li>
+    </ul>
+    
+    <p>These functions illustrate the core capabilities of blockchain technology and cryptocurrencies, highlighting their potential to revolutionize various industries.</p>
+</div>
     </div>
     <div class="footer">
         <a href="./register.html">Register</a> | 
