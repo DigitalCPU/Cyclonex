@@ -35,15 +35,14 @@
             z-index: 2;
             flex-grow: 1;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: flex-start;
         }
         .sidebar {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-right: 20px;
-            position: relative;
+            margin: 20px;
         }
         .sidebar img {
             width: 25%;
@@ -83,284 +82,13 @@
     <script>
         function changeContent(section) {
             const contentDiv = document.getElementById('content');
-            
             const sections = {
-                'AGX 01': `<h2>AGX Mining</h2><p>Mining cryptocurrency is the process of validating and adding transactions to a blockchain network while competing to solve complex mathematical puzzles. It involves using computational power to find a cryptographic hash that meets the network's requirements, securing the blockchain and issuing new coins as a reward to miners.</p>
-
-<p>Here's how it works:</p>
-<ul>
-    <li><strong>Transaction Verification</strong> – Miners gather pending transactions from the network and validate them.</li>
-    <li><strong>Block Formation</strong> – These verified transactions are grouped into a block.</li>
-    <li><strong>Proof of Work (PoW) or Other Consensus Mechanisms</strong> – Miners solve a cryptographic puzzle (in PoW systems like Bitcoin) by finding a hash below a certain target. This requires computational power.</li>
-    <li><strong>Block Addition</strong> – The first miner to find the correct hash broadcasts it to the network. If verified by other nodes, the new block is added to the blockchain.</li>
-    <li><strong>Rewards</strong> – The winning miner receives newly minted cryptocurrency and transaction fees as a reward.</li>
-</ul>
-<p>Mining is a way to <strong>decentralize</strong> the verification process and maintain network integrity without a central authority. However, due to increasing difficulty and energy costs, many miners now use <strong>mining pools</strong> to combine computational power and share rewards.</p>` ,
-                'AGX 02': `<h2>AGX Value</h2><p>Cryptocurrency as a store of value relies on its decentralized nature, limited supply, and security features. It enables microtransactions and peer-to-peer (P2P) transactions by providing a digital medium of exchange that operates outside traditional financial systems.</p>
-
-<h3>1. Cryptocurrency as a Store of Value</h3>
-<p>A store of value is an asset that retains its worth over time and can be saved, retrieved, and exchanged later without losing purchasing power. Crypto qualifies due to several factors:</p>
-
-<h4>A. Scarcity & Limited Supply</h4>
-<ul>
-    <li>Many cryptocurrencies, like Bitcoin (BTC), have a fixed supply (21 million BTC). This prevents inflation from eroding value over time.</li>
-    <li>Unlike fiat currency, which can be printed at will, cryptocurrencies often follow deflationary models.</li>
-</ul>
-
-<h4>B. Decentralization & Security</h4>
-<ul>
-    <li>No central authority (banks or governments) controls crypto, making it resistant to manipulation.</li>
-    <li>Blockchain technology ensures secure, immutable transactions, reducing fraud.</li>
-</ul>
-
-<h4>C. Portability & Accessibility</h4>
-<ul>
-    <li>Digital nature allows crypto to be stored in wallets and accessed globally without intermediaries.</li>
-    <li>Users in countries with unstable currencies (hyperinflation economies) use crypto to preserve wealth.</li>
-</ul>
-
-<h4>D. Increasing Adoption & Liquidity</h4>
-<ul>
-    <li>As more businesses accept crypto, its usability increases.</li>
-    <li>Stablecoins (USDT, USDC) act as reliable stores of value without price volatility.</li>
-</ul>
-
-<h3>2. Microtransactions: Small Payments at Low Cost</h3>
-<p>Cryptocurrency enables small-value transactions (fractions of a cent) without the high fees associated with traditional payment systems.</p>
-
-<h4>A. Why Crypto is Ideal for Microtransactions</h4>
-<ul>
-    <li><strong>Low Transaction Costs</strong> – Traditional payment networks (Visa, PayPal) charge high fees for small transactions. Crypto transactions on networks like Lightning Network (Bitcoin) or Layer-2 Ethereum solutions drastically reduce costs.</li>
-    <li><strong>Speed & Efficiency</strong> – Blockchain transactions can settle instantly or within seconds, unlike bank settlements that may take days.</li>
-    <li><strong>Borderless Payments</strong> – No restrictions or currency conversion fees; anyone with an internet connection can participate.</li>
-</ul>
-
-<h4>B. Real-World Use Cases</h4>
-<ul>
-    <li><strong>Gaming & Digital Content</strong> – Gamers use crypto for in-game purchases without centralized platforms taking a cut.</li>
-    <li><strong>Streaming & Tipping</strong> – Platforms like Brave allow users to send micro-tips to content creators.</li>
-    <li><strong>Subscription Models</strong> – Crypto-based pay-per-use services allow users to pay fractions of a dollar for specific content instead of committing to full subscriptions.</li>
-</ul>
-
-<h3>3. Peer-to-Peer (P2P) Transactions</h3>
-<p>P2P transactions remove intermediaries (banks, PayPal) and allow users to send crypto directly to each other without a third party.</p>
-
-<h4>A. Advantages of P2P Crypto Transactions</h4>
-<ul>
-    <li><strong>No Banks, No Middlemen</strong> – No need for banks or clearinghouses to approve transfers.</li>
-    <li><strong>24/7 Availability</strong> – Unlike banks with limited hours, crypto transactions occur anytime, globally.</li>
-    <li><strong>Censorship-Resistant</strong> – Transactions cannot be frozen or blocked by financial institutions.</li>
-    <li><strong>Lower Fees</strong> – Sending money across borders with traditional remittance services (Western Union) incurs high fees. Crypto allows direct, nearly instant payments at a fraction of the cost.</li>
-</ul>
-
-<h4>B. Examples of P2P Crypto Usage</h4>
-<ul>
-    <li><strong>Remittances</strong> – Workers send crypto home instead of using expensive money transfer services.</li>
-    <li><strong>Decentralized Marketplaces</strong> – Users trade goods/services in exchange for crypto without centralized platforms.</li>
-    <li><strong>Privacy Payments</strong> – Some cryptocurrencies (Monero, Zcash) allow users to transact anonymously.</li>
-</ul>` ,
-                'AGX 03': `<h2>AGX is a Utility Token</h2><p>A utility token is a type of cryptocurrency designed to provide access to a product, service, or ecosystem within a blockchain network. Unlike security tokens, which represent ownership or investment in an asset, utility tokens are not designed for direct investment but instead fuel an ecosystem.</p>
-
-<p>Utility tokens power decentralized applications (dApps), smart contracts, and blockchain-based services, enabling functions such as governance, staking, and microtransactions.</p>
-
-<h3>1. Purpose & Functionality of Utility Tokens</h3>
-<p>Utility tokens act as digital credits that users spend to interact with blockchain networks, platforms, and applications. Here’s how they function:</p>
-
-<h4>A. Access to Services</h4>
-<ul>
-    <li>Users must own and spend the token to access a platform’s services.</li>
-    <li><strong>Example:</strong> Argentix (AGX) (in the Cyclosphere ecosystem) could be required for premium AI interactions or accessing exclusive features.</li>
-</ul>
-
-<h4>B. Transaction Fees</h4>
-<ul>
-    <li>Many blockchain networks require utility tokens to pay transaction fees (gas fees).</li>
-    <li><strong>Example:</strong> Ethereum (ETH) is required to process transactions and smart contract executions on the Ethereum network.</li>
-</ul>
-
-<h4>C. Staking & Network Security</h4>
-<ul>
-    <li>Some utility tokens allow users to stake (lock up) their tokens in the network to earn rewards or participate in governance.</li>
-    <li><strong>Example:</strong> Polkadot (DOT) and Cardano (ADA) allow staking for securing the network and receiving rewards.</li>
-</ul>
-
-<h4>D. Governance & Voting</h4>
-<ul>
-    <li>Utility tokens are used in Decentralized Autonomous Organizations (DAOs) for governance decisions.</li>
-    <li>Token holders vote on protocol upgrades, policies, and ecosystem changes.</li>
-    <li><strong>Example:</strong> Uniswap (UNI) token holders vote on Uniswap’s protocol developments.</li>
-</ul>
-
-<h4>E. Incentives & Rewards</h4>
-<ul>
-    <li>Platforms reward users with utility tokens for completing tasks, contributing to the ecosystem, or staking.</li>
-    <li><strong>Example:</strong> Brave Browser (BAT – Basic Attention Token) rewards users for viewing ads.</li>
-</ul>
-
-<h3>2. Use Cases of Utility Tokens in Different Industries</h3>
-
-<h4>A. Gaming & Virtual Economies</h4>
-<ul>
-    <li>Games use utility tokens for in-game transactions, NFT purchases, and rewards.</li>
-    <li><strong>Example:</strong> Axie Infinity (AXS, SLP) allows users to breed, trade, and battle digital pets.</li>
-</ul>
-
-<h4>B. Cloud Computing & Decentralized Storage</h4>
-<ul>
-    <li>Users pay utility tokens to store or access data on decentralized networks.</li>
-    <li><strong>Example:</strong> Filecoin (FIL) provides decentralized cloud storage services.</li>
-</ul>
-
-<h4>C. AI & Machine Learning</h4>
-<ul>
-    <li>AI services use utility tokens as access credits for computations.</li>
-    <li><strong>Example:</strong> SingularityNET (AGI) allows AI models to be accessed via blockchain transactions.</li>
-</ul>
-
-<h4>D. DeFi (Decentralized Finance)</h4>
-<ul>
-    <li>Utility tokens enable lending, borrowing, and liquidity pools in DeFi protocols.</li>
-    <li><strong>Example:</strong> Aave (AAVE) and Compound (COMP) offer tokens for decentralized lending platforms.</li>
-</ul>
-
-<h3>3. Advantages of Utility Tokens</h3>
-<ul>
-    <li><strong>Decentralization & Trustless Interactions</strong> – Users can transact without intermediaries.</li>
-    <li><strong>Programmability</strong> – Tokens integrate with smart contracts to automate actions.</li>
-    <li><strong>Global Accessibility</strong> – Anyone with internet access can use utility tokens.</li>
-    <li><strong>Low-Cost & Efficient Transactions</strong> – Enables microtransactions without traditional banking fees.</li>
-    <li><strong>Incentivization</strong> – Users are rewarded for participating in networks.</li>
-</ul>
-
-<h3>4. Challenges & Considerations</h3>
-<ul>
-    <li><strong>Regulatory Uncertainty</strong> – Some governments classify certain utility tokens as securities.</li>
-    <li><strong>Volatility</strong> – Utility tokens often fluctuate in price, affecting usability.</li>
-    <li><strong>Adoption & Demand</strong> – A token’s success depends on ecosystem adoption.</li>
-</ul>
-
-<h3>5. Utility Token Example in Cyclosphere: Argentix (AGX)</h3>
-<p>In the Cyclosphere ecosystem, Argentix (AGX) is the native utility token that:</p>
-<ul>
-    <li>Powers transactions within LifeLike, NovaSearch, Quazar, and other services.</li>
-    <li>Enables premium AI interactions, secure identity verification, and data transactions.</li>
-    <li>Can be staked for governance and network security.</li>
-    <li>Incentivizes developers, creators, and users to contribute to Cyclosphere.</li>
-</ul>` ,
-                'AGX 04': `<h2>Cryptocurrency as Smart Contracts</h2>
-
-<h3>1. What is a Smart Contract?</h3>
-<p>A smart contract is a self-executing program stored on a blockchain that automatically enforces agreements when predefined conditions are met. It eliminates intermediaries, ensuring trustless, secure, and automated transactions.</p>
-
-<h3>Key Features of Smart Contracts:</h3>
-<ul>
-    <li><strong>Automated Execution:</strong> No manual processing; conditions execute automatically.</li>
-    <li><strong>Trustless Transactions:</strong> No need for third-party verification.</li>
-    <li><strong>Immutable and Secure:</strong> Stored on the blockchain, making it tamper-proof.</li>
-    <li><strong>Transparent:</strong> The contract code is visible and verifiable on the blockchain.</li>
-</ul>
-
-<h3>2. How Smart Contracts Use Cryptocurrency</h3>
-<p>Smart contracts utilize cryptocurrency in several ways:</p>
-
-<h4>A. Payments and Transactions</h4>
-<ul>
-    <li>Smart contracts can automate cryptocurrency payments when specific conditions are met.</li>
-    <li><strong>Example:</strong> A freelancer receives payment automatically when work is completed.</li>
-</ul>
-
-<h4>B. Tokenized Assets and Ownership</h4>
-<ul>
-    <li>Smart contracts manage tokenized assets such as non-fungible tokens (NFTs), real estate, and digital collectibles.</li>
-    <li><strong>Example:</strong> When an NFT is purchased, the smart contract transfers ownership instantly.</li>
-</ul>
-
-<h4>C. Decentralized Finance (DeFi)</h4>
-<ul>
-    <li>Smart contracts facilitate lending and borrowing by enforcing automated agreements.</li>
-    <li>Liquidity pools allow users to provide liquidity and earn fees on decentralized exchanges.</li>
-    <li>Yield farming and staking enable users to earn rewards by locking tokens in smart contracts.</li>
-</ul>
-
-<h4>D. Decentralized Autonomous Organizations (DAOs)</h4>
-<ul>
-    <li>Smart contracts govern DAOs, enabling decentralized decision-making.</li>
-    <li>Token holders vote on proposals, and smart contracts automatically implement decisions.</li>
-</ul>
-
-<h4>E. Supply Chain Management</h4>
-<ul>
-    <li>Cryptocurrencies can be tied to smart contracts that track goods from production to delivery.</li>
-    <li><strong>Example:</strong> A shipment is automatically marked as paid when it reaches its destination.</li>
-</ul>
-
-<h3>3. Smart Contract Platforms and Cryptocurrencies</h3>
-<p>Several blockchain networks support smart contracts:</p>
-
-<table border="1" cellspacing="0" cellpadding="5">
-    <tr>
-        <th>Blockchain</th>
-        <th>Native Token</th>
-        <th>Smart Contract Language</th>
-        <th>Use Case</th>
-    </tr>
-    <tr>
-        <td>Ethereum</td>
-        <td>ETH</td>
-        <td>Solidity</td>
-        <td>Decentralized finance, NFTs, DAOs</td>
-    </tr>
-    <tr>
-        <td>Binance Smart Chain</td>
-        <td>BNB</td>
-        <td>Solidity</td>
-        <td>Fast transactions, low fees</td>
-    </tr>
-    <tr>
-        <td>Solana</td>
-        <td>SOL</td>
-        <td>Rust</td>
-        <td>High-speed smart contracts</td>
-    </tr>
-    <tr>
-        <td>Cardano</td>
-        <td>ADA</td>
-        <td>Plutus</td>
-        <td>Secure and scalable contracts</td>
-    </tr>
-    <tr>
-        <td>Polkadot</td>
-        <td>DOT</td>
-        <td>Substrate</td>
-        <td>Cross-chain interoperability</td>
-    </tr>
-</table>
-
-<h3>4. Advantages of Smart Contracts</h3>
-<ul>
-    <li><strong>Trustless and Secure:</strong> No need for intermediaries.</li>
-    <li><strong>Efficient and Fast:</strong> Automates processes, reducing time and costs.</li>
-    <li><strong>Tamper-Proof:</strong> Immutable once deployed on the blockchain.</li>
-    <li><strong>Global and Borderless:</strong> Anyone can interact with smart contracts from anywhere.</li>
-</ul>
-
-<h3>5. Challenges and Considerations</h3>
-<ul>
-    <li><strong>Code Vulnerabilities:</strong> Bugs in smart contracts can be exploited.</li>
-    <li><strong>Regulatory Uncertainty:</strong> Some governments classify smart contracts as securities.</li>
-    <li><strong>Blockchain Fees:</strong> Transactions require network fees, which can be expensive on certain blockchains.</li>
-</ul>
-
-<h3>6. Smart Contracts in Cyclosphere</h3>
-<p>In Cyclosphere, smart contracts can be used for:</p>
-<ul>
-    <li>Automating financial transactions in Argentix.</li>
-    <li>Managing AI-powered governance within Veyrah.</li>
-    <li>Implementing trustless agreements in decentralized applications.</li>
-</ul>`
+                'AGX 01': `<h2>AGX Mining</h2><p>Mining cryptocurrency is the process of validating and adding transactions to a blockchain network...</p>` ,
+                'AGX 02': `<h2>AGX Value</h2><p>Cryptocurrency as a store of value relies on its decentralized nature...</p>` ,
+                'AGX 03': `<h2>AGX Utility Token</h2><p>A utility token is a type of cryptocurrency designed to provide access...</p>` ,
+                'AGX 04': `<h2>Cryptocurrency as Smart Contracts</h2><p>A smart contract is a self-executing program stored on a blockchain...</p>`
             };
-            
-            contentDiv.innerHTML = sections[section] || '<h2>What is Argentix?</h2><p>Argentix is a cutting-edge cryptocurrency developed within the CycloNex ecosystem, designed to power decentralized applications, enable secure transactions, and revolutionize the digital economy through seamless blockchain integration.</p>';
+            contentDiv.innerHTML = sections[section] || '<h2>What is Argentix?</h2><p>Argentix is a cutting-edge cryptocurrency...</p>';
         }
     </script>
 </head>
@@ -376,31 +104,15 @@
             <img src="agx 04.svg" alt="AGX 04" onclick="changeContent('AGX 04')">
         </div>
         <div class="content" id="content">
-    <h2>What is Argentix?</h2>
-    <p>Argentix is a cutting-edge cryptocurrency developed within the CycloNex ecosystem, designed to power decentralized applications, enable secure transactions, and revolutionize the digital economy through seamless blockchain integration.</p>
-    
-    <h2>Here’s a breakdown of the typical functions of blockchain and cryptocurrency:</h2>
-    
-    <h3>Blockchain Functions</h3>
-    <ul>
-        <li><strong>Decentralization:</strong> Blockchain operates on a decentralized network, distributing data across multiple nodes. This reduces the risk of a single point of failure and enhances security.</li>
-        <li><strong>Transparency:</strong> Each transaction on the blockchain is recorded in a public ledger that can be viewed by anyone. This transparency fosters trust among users and allows for easier auditing.</li>
-        <li><strong>Immutability:</strong> Once a transaction is added to the blockchain, it cannot be altered or deleted. This ensures the integrity of the data and provides a reliable history of all transactions.</li>
-        <li><strong>Security:</strong> Advanced cryptographic techniques secure the data on the blockchain. This protects against unauthorized access and fraud, making it a secure method for recording transactions.</li>
-        <li><strong>Smart Contracts:</strong> Blockchain technology can facilitate automated contracts that execute when predefined conditions are met. This reduces the need for intermediaries and streamlines processes.</li>
-    </ul>
-    
-    <h3>Cryptocurrency Functions</h3>
-    <ul>
-        <li><strong>Digital Currency:</strong> Cryptocurrencies serve as a medium of exchange, allowing users to buy goods and services. They provide an alternative to traditional fiat currencies.</li>
-        <li><strong>Store of Value:</strong> Many cryptocurrencies, like Bitcoin, are viewed as a store of value, similar to precious metals. They can act as a hedge against inflation and economic instability.</li>
-        <li><strong>Peer-to-Peer Transactions:</strong> Cryptocurrencies enable direct transactions between users without the need for a financial intermediary, reducing transaction fees and processing times.</li>
-        <li><strong>Microtransactions:</strong> Cryptocurrencies facilitate small transactions that might be impractical with traditional payment methods, opening new possibilities for business models.</li>
-        <li><strong>Tokenization:</strong> Cryptocurrencies can represent ownership of assets, such as real estate or artwork, through tokenization. This process simplifies the transfer of ownership and enhances liquidity.</li>
-    </ul>
-    
-    <p>These functions illustrate the core capabilities of blockchain technology and cryptocurrencies, highlighting their potential to revolutionize various industries.</p>
-</div>
+            <h2>What is Argentix?</h2>
+            <p>Argentix is a cutting-edge cryptocurrency developed within the CycloNex ecosystem...</p>
+        </div>
+        <div class="sidebar">
+            <img src="argentix 001.svg" alt="Back to Argentix" onclick="changeContent('')">
+            <a href="https://digitalcpu.github.io/Cyclonex">
+                <img src="cyclonex 001.svg" alt="Back to CycloNex">
+            </a>
+        </div>
     </div>
     <div class="footer">
         <a href="./register.html">Register</a> | 
