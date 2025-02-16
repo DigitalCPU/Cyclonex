@@ -9,10 +9,13 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #0a0a0a url('argentix 003.svg') no-repeat center center fixed;
+            background: #0a0a0a url('argentix_003.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .overlay {
             background: rgba(0, 0, 0, 0.7);
@@ -25,6 +28,7 @@
         .container {
             position: relative;
             z-index: 2;
+            flex-grow: 1;
         }
         .header {
             padding: 20px;
@@ -41,7 +45,9 @@
         .footer {
             padding: 20px;
             background: #111;
-            margin-top: 20px;
+            position: relative;
+            width: 100%;
+            bottom: 0;
         }
         a {
             color: cyan;
@@ -61,12 +67,12 @@
             <p>Welcome to the <strong>Argentix</strong> page. More information coming soon.</p>
             <a href="./index.html">Back to Home</a>
         </div>
-        <div class="footer">
-            <a href="./register.html">Register</a> | 
-            <a href="./contact.html">Contact</a> | 
-            <a href="./jobs.html">Careers</a> | 
-            <a href="./about.html">About Us</a>
-        </div>
+    </div>
+    <div class="footer">
+        <a href="./register.html">Register</a> | 
+        <a href="./contact.html">Contact</a> | 
+        <a href="./jobs.html">Careers</a> | 
+        <a href="./about.html">About Us</a>
     </div>
 </body>
 </html>
