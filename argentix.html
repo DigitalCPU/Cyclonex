@@ -80,6 +80,23 @@
             display: block;
         }
         
+        .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .right-sidebar img {
+            width: 80px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .right-sidebar img:hover {
+            transform: scale(1.1);
+        }
+        
         .footer {
             padding: 20px;
             background: rgba(17, 17, 17, 0.85);
@@ -105,7 +122,7 @@
                 align-items: center;
             }
 
-            .sidebar {
+            .sidebar, .right-sidebar {
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
@@ -156,6 +173,12 @@
                 <h2>Smart Contracts</h2>
                 <p>A smart contract is a self-executing program stored on a blockchain...</p>
             </div>
+        </div>
+
+        <div class="right-sidebar">
+            <a href="https://digitalcpu.github.io/Cyclonex/">
+                <img src="cyclonex 001.svg" alt="Back to CycloNex">
+            </a>
         </div>
     </div>
 
