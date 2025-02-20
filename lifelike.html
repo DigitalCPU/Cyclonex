@@ -19,11 +19,11 @@
             background: #111;
             padding: 20px;
             text-align: center;
-            display: none;
             position: fixed;
-            left: 0;
+            left: -250px;
             top: 0;
             height: 100vh;
+            transition: left 0.3s ease-in-out;
         }
 
         .sidebar img {
@@ -47,12 +47,26 @@
             margin-top: 10px;
         }
 
+        .toggle-btn {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            background: cyan;
+            color: black;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
         .main-container {
-            margin-left: 250px;
+            margin-left: 0;
             width: 100%;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            transition: margin-left 0.3s ease-in-out;
         }
 
         .header {
@@ -103,6 +117,8 @@
     </style>
 </head>
 <body>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    
     <div class="sidebar" id="userSidebar">
         <img id="sidebarAvatar" src="default-avatar.png" alt="User Avatar">
         <p><strong>Username:</strong> <span id="sidebarUsername">Guest</span></p>
@@ -110,7 +126,7 @@
         <a href="chatroom.html">💬 Enter Chatroom</a>
     </div>
 
-    <div class="main-container">
+    <div class="main-container" id="mainContainer">
         <div class="header">LifeLike</div>
 
         <div class="nav">
@@ -146,11 +162,24 @@
             let avatar = localStorage.getItem("lifelike_profile_pic") || "default-avatar.png";
 
             if (loggedIn === "true") {
-                document.getElementById("userSidebar").style.display = "block";
+                document.getElementById("userSidebar").style.left = "0";
                 document.getElementById("sidebarUsername").textContent = username;
                 document.getElementById("sidebarAvatar").src = avatar;
             }
         };
+
+        function toggleSidebar() {
+            let sidebar = document.getElementById("userSidebar");
+            let mainContainer = document.getElementById("mainContainer");
+            
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px";
+                mainContainer.style.marginLeft = "0";
+            } else {
+                sidebar.style.left = "0";
+                mainContainer.style.marginLeft = "250px";
+            }
+        }
     </script>
 </body>
 </html>
