@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - LifeLike</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Register</h2>
+    <div class="container">
+        <input type="text" id="username" placeholder="Enter Username" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <button onclick="registerUser()">Sign Up</button>
+        <p>Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+
+    <script>
+        function registerUser() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            if (username && password) {
+                localStorage.setItem("lifelike_username", username);
+                localStorage.setItem("lifelike_password", password);
+                alert("Registration successful! You can now log in.");
+                window.location.href = "login.html";
+            } else {
+                alert("Please enter both a username and password.");
+            }
+        }
+    </script>
+</body>
+</html>
 
