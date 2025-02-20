@@ -11,7 +11,6 @@
             padding: 0;
             background-color: #0a0a0a;
             color: white;
-            text-align: center;
             display: flex;
         }
 
@@ -19,7 +18,7 @@
             width: 250px;
             background: #111;
             padding: 20px;
-            text-align: left;
+            text-align: center;
             display: none;
             position: fixed;
             left: 0;
@@ -28,19 +27,35 @@
         }
 
         .sidebar img {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             display: block;
-            margin-bottom: 10px;
+            margin: 10px auto;
+            border: 2px solid cyan;
         }
 
         .sidebar p {
             color: cyan;
+            font-size: 16px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: cyan;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .main-container {
+            margin-left: 250px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .header {
-            width: 100%;
             padding: 20px;
             background: #111;
             font-size: 28px;
@@ -48,41 +63,38 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             border-bottom: 2px solid cyan;
-            margin-left: 250px;
+            text-align: center;
         }
 
         .nav {
             background: #222;
-            padding: 10px;
-            margin-left: 250px;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         .nav a {
             color: cyan;
             text-decoration: none;
-            margin: 0 15px;
             font-size: 18px;
+            padding: 10px;
         }
 
         .content {
-            margin: 20px auto;
+            flex-grow: 1;
             padding: 30px;
             background: #222;
             border-radius: 10px;
-            max-width: 800px;
-            margin-left: 250px;
+            max-width: 900px;
+            margin: 30px auto;
+            text-align: center;
         }
 
         .footer {
             padding: 20px;
             background: #111;
-            margin-top: 20px;
-            margin-left: 250px;
-        }
-
-        a {
-            color: cyan;
-            text-decoration: none;
+            text-align: center;
         }
 
         a:hover {
@@ -94,34 +106,37 @@
     <div class="sidebar" id="userSidebar">
         <img id="sidebarAvatar" src="default-avatar.png" alt="User Avatar">
         <p><strong>Username:</strong> <span id="sidebarUsername">Guest</span></p>
-        <p><a href="chatroom.html">💬 Enter Chatroom</a></p>
+        <a href="profile.html">Edit Profile</a>
+        <a href="chatroom.html">💬 Enter Chatroom</a>
     </div>
 
-    <div class="header">LifeLike</div>
+    <div class="main-container">
+        <div class="header">LifeLike</div>
 
-    <div class="nav">
-        <a href="./index.html">Home</a>
-        <a href="./register.html">Register</a>
-        <a href="./login.html">Login</a>
-        <a href="./profile.html">Profile</a>
-        <a href="./contact.html">Contact</a>
-        <a href="./jobs.html">Careers</a>
-        <a href="./about.html">About Us</a>
-    </div>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="profile.html">Profile</a>
+            <a href="contact.html">Contact</a>
+            <a href="jobs.html">Careers</a>
+            <a href="about.html">About Us</a>
+        </div>
 
-    <div class="content">
-        <h2>Welcome to LifeLike</h2>
-        <p><strong>LifeLike</strong> is the **next evolution of social interaction**, where users connect **exclusively through live streams**. There are no uploads—just real-time engagement.</p>
-        <p>To access the LifeLike chatroom, you must first <a href="register.html">sign up</a> and <a href="login.html">log in</a>.</p>
-    </div>
+        <div class="content">
+            <h2>Welcome to LifeLike</h2>
+            <p><strong>LifeLike</strong> is the **next evolution of social interaction**, where users connect **exclusively through live streams**. There are no uploads—just real-time engagement.</p>
+            <p>To access the LifeLike chatroom, you must first <a href="register.html">sign up</a> and <a href="login.html">log in</a>.</p>
+        </div>
 
-    <div class="footer">
-        <a href="./register.html">Register</a> | 
-        <a href="./login.html">Login</a> | 
-        <a href="./profile.html">Profile</a> | 
-        <a href="./contact.html">Contact</a> | 
-        <a href="./jobs.html">Careers</a> | 
-        <a href="./about.html">About Us</a>
+        <div class="footer">
+            <a href="register.html">Register</a> | 
+            <a href="login.html">Login</a> | 
+            <a href="profile.html">Profile</a> | 
+            <a href="contact.html">Contact</a> | 
+            <a href="jobs.html">Careers</a> | 
+            <a href="about.html">About Us</a>
+        </div>
     </div>
 
     <script>
