@@ -123,7 +123,7 @@
             document.getElementById("sidebar").classList.toggle("open");
         }
         
-        function setCookie(name, value, days) {
+        function setCookie(name, value, days = 365) {
             let expires = "";
             if (days) {
                 let date = new Date();
