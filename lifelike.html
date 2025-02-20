@@ -3,182 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeLike - CycloNex</title>
+    <title>LifeLike - Profile</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #0a0a0a;
             color: white;
-            display: flex;
-        }
-
-        .sidebar {
-            width: 250px;
-            background: #111;
-            padding: 20px;
             text-align: center;
-            position: fixed;
-            left: -250px;
-            top: 0;
-            height: 100vh;
-            transition: left 0.3s ease-in-out;
         }
-
-        .sidebar img {
-            width: 100px;
-            height: 100px;
+        .container {
+            margin-top: 50px;
+        }
+        input, button, textarea {
+            margin: 10px;
+            padding: 10px;
+            width: 250px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #profile-pic {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
+            object-fit: cover;
             display: block;
             margin: 10px auto;
             border: 2px solid cyan;
         }
-
-        .sidebar p {
-            color: cyan;
-            font-size: 16px;
-        }
-
-        .sidebar a {
-            display: block;
-            color: cyan;
-            text-decoration: none;
-            margin-top: 10px;
-        }
-
-        .toggle-btn {
-            position: fixed;
-            left: 10px;
-            top: 10px;
-            background: cyan;
-            color: black;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 1000;
-        }
-
-        .main-container {
-            margin-left: 0;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            transition: margin-left 0.3s ease-in-out;
-        }
-
-        .header {
+        .drop-area {
+            border: 2px dashed cyan;
             padding: 20px;
-            background: #111;
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-bottom: 2px solid cyan;
-            text-align: center;
+            margin: 20px auto;
+            cursor: pointer;
+            width: 200px;
         }
-
-        .nav {
+        .friends-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .friend {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid cyan;
+        }
+        .friend img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .friend-popup {
+            display: none;
+            position: fixed;
             background: #222;
             padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+            border-radius: 5px;
+            border: 1px solid cyan;
+            color: white;
+            text-align: center;
         }
-
-        .nav a {
-            color: cyan;
+        .nav-buttons a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: cyan;
+            color: black;
             text-decoration: none;
-            font-size: 18px;
-            padding: 10px;
+            border-radius: 5px;
         }
-
-        .content {
-            flex-grow: 1;
-            padding: 30px;
-            background: #222;
-            border-radius: 10px;
-            max-width: 900px;
-            margin: 30px auto;
-            text-align: center;
-        }
-
-        .footer {
-            padding: 20px;
-            background: #111;
-            text-align: center;
-        }
-
-        a:hover {
+        .nav-buttons a:hover {
+            background: #00ffff;
             text-shadow: 0px 0px 10px cyan;
         }
     </style>
 </head>
 <body>
-    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-    
-    <div class="sidebar" id="userSidebar">
-        <img id="sidebarAvatar" src="default-avatar.png" alt="User Avatar">
-        <p><strong>Username:</strong> <span id="sidebarUsername">Guest</span></p>
-        <a href="profile.html">Edit Profile</a>
-        <a href="chatroom.html">💬 Enter Chatroom</a>
+    <h2>My Profile</h2>
+    <div class="container">
+        <img id="profile-pic" src="default-avatar.png" alt="Profile Picture">
+        <div class="drop-area" id="dropArea">Drag & Drop Profile Picture Here</div>
+        <input type="file" id="upload-pic" accept="image/png, image/jpeg, image/gif, image/webp, image/svg+xml">
+        <input type="text" id="username" placeholder="Enter Username">
+        <textarea id="bio" placeholder="Enter your bio..."></textarea>
+        <button onclick="saveProfile()">Save Profile</button>
+        <button onclick="logout()">Logout</button>
     </div>
 
-    <div class="main-container" id="mainContainer">
-        <div class="header">LifeLike</div>
+    <h3>Friends List</h3>
+    <div class="friends-list" id="friendsList"></div>
+    <button onclick="seeAllFriends()">See All Friends</button>
+    <br><a href="inbox.html">📩 Inbox</a>
 
-        <div class="nav">
-            <a href="index.html">Home</a>
-            <a href="register.html">Register</a>
-            <a href="login.html">Login</a>
-            <a href="profile.html">Profile</a>
-            <a href="contact.html">Contact</a>
-            <a href="jobs.html">Careers</a>
-            <a href="about.html">About Us</a>
-        </div>
+    <div class="friend-popup" id="friendPopup">
+        <p>Options:</p>
+        <button onclick="dmFriend()">Direct Message</button>
+        <button onclick="editFriend()">Edit</button>
+        <button onclick="closePopup()">Close</button>
+    </div>
 
-        <div class="content">
-            <h2>Welcome to LifeLike</h2>
-            <p><strong>LifeLike</strong> is the **next evolution of social interaction**, where users connect **exclusively through live streams**. There are no uploads—just real-time engagement.</p>
-            <p>To access the LifeLike chatroom, you must first <a href="register.html">sign up</a> and <a href="login.html">log in</a>.</p>
-        </div>
-
-        <div class="footer">
-            <a href="register.html">Register</a> | 
-            <a href="login.html">Login</a> | 
-            <a href="profile.html">Profile</a> | 
-            <a href="contact.html">Contact</a> | 
-            <a href="jobs.html">Careers</a> | 
-            <a href="about.html">About Us</a>
-        </div>
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="lifelike.html">🏠 Home</a>
+        <a href="chatroom.html">💬 Chatroom</a>
     </div>
 
     <script>
         window.onload = function() {
-            let loggedIn = localStorage.getItem("lifelike_logged_in");
-            let username = localStorage.getItem("lifelike_username") || "Guest";
-            let avatar = localStorage.getItem("lifelike_profile_pic") || "default-avatar.png";
-
-            if (loggedIn === "true") {
-                document.getElementById("userSidebar").style.left = "0";
-                document.getElementById("sidebarUsername").textContent = username;
-                document.getElementById("sidebarAvatar").src = avatar;
+            if (localStorage.getItem("lifelike_logged_in") !== "true") {
+                alert("You must be logged in to view your profile.");
+                window.location.href = "login.html";
             }
+            document.getElementById("username").value = localStorage.getItem("lifelike_username") || "";
+            document.getElementById("bio").value = localStorage.getItem("lifelike_bio") || "";
+            let storedPic = localStorage.getItem("lifelike_profile_pic");
+            if (storedPic) {
+                document.getElementById("profile-pic").src = storedPic;
+            }
+            loadFriends();
         };
 
-        function toggleSidebar() {
-            let sidebar = document.getElementById("userSidebar");
-            let mainContainer = document.getElementById("mainContainer");
-            
-            if (sidebar.style.left === "0px") {
-                sidebar.style.left = "-250px";
-                mainContainer.style.marginLeft = "0";
-            } else {
-                sidebar.style.left = "0";
-                mainContainer.style.marginLeft = "250px";
+        function saveProfile() {
+            let username = document.getElementById("username").value;
+            let bio = document.getElementById("bio").value;
+            localStorage.setItem("lifelike_username", username);
+            localStorage.setItem("lifelike_bio", bio);
+            alert("Profile updated!");
+        }
+
+        function loadFriends() {
+            let friendsList = document.getElementById("friendsList");
+            friendsList.innerHTML = "";
+            for (let i = 0; i < 8; i++) {
+                let friend = document.createElement("div");
+                friend.classList.add("friend");
+                friend.innerHTML = `<img src="default-avatar.png" alt="Friend ${i+1}">`;
+                friend.onclick = () => showFriendOptions(friend);
+                friendsList.appendChild(friend);
             }
+        }
+
+        function showFriendOptions(friend) {
+            let popup = document.getElementById("friendPopup");
+            popup.style.display = "block";
+            popup.style.top = event.clientY + "px";
+            popup.style.left = event.clientX + "px";
+        }
+
+        function closePopup() {
+            document.getElementById("friendPopup").style.display = "none";
+        }
+
+        function dmFriend() {
+            alert("Direct Message feature coming soon!");
+        }
+
+        function editFriend() {
+            alert("Edit friend feature coming soon!");
+        }
+
+        function seeAllFriends() {
+            alert("See all friends feature coming soon!");
+        }
+
+        function logout() {
+            localStorage.removeItem("lifelike_logged_in");
+            window.location.href = "login.html";
         }
     </script>
 </body>
