@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatroom - LifeLike</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            text-align: center;
+        }
+        .chatbox {
+            width: 80%;
+            height: 400px;
+            background: #222;
+            margin: 20px auto;
+            padding: 20px;
+            overflow-y: scroll;
+            border-radius: 10px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <h2>LifeLike Chatroom</h2>
+    <div class="chatbox" id="chatbox"></div>
+    <input type="text" id="message" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        // Restrict access if not logged in
+        if (localStorage.getItem("lifelike_logged_in") !== "true") {
+            alert("You must be logged in to access the chatroom.");
+            window.location.href = "login.html";
+        }
+
+        function sendMessage() {
+            let message = document.getElementById("message").value;
+            if (message.trim() !== "") {
+                let chatbox = document.getElementById("chatbox");
+                chatbox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+                document.getElementById("message").value = "";
+                autoReply();
+            }
+        }
+
+        function autoReply() {
+            setTimeout(() => {
+                let chatbox = document.getElementById("chatbox");
+                let botMessages = [
+                    "Hello!",
+                    "How’s your day going?",
+                    "LifeLike is all about real-time interaction!",
+                    "What do you think about this project?",
+                    "Ask me anything!"
+                ];
+                let randomMsg = botMessages[Math.floor(Math.random() * botMessages.length)];
+                chatbox.innerHTML += `<p><strong>Bot:</strong> ${randomMsg}</p>`;
+            }, 1000);
+        }
+
+        function logout() {
+            localStorage.removeItem("lifelike_logged_in");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
