@@ -10,8 +10,59 @@
             background-color: #0a0a0a;
             color: white;
             text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
         }
-        .nav-buttons a {
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #111;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            transition: 0.3s;
+            padding-top: 20px;
+            text-align: center;
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            background: cyan;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .sidebar button:hover {
+            background: #00ffff;
+        }
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            width: 100%;
+            text-align: center;
+        }
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: cyan;
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .toggle-btn:hover {
+            background: #00ffff;
+        }
+        .nav-buttons a, .auth-buttons a {
             display: block;
             margin: 20px auto;
             padding: 15px;
@@ -21,21 +72,68 @@
             border-radius: 5px;
             width: 200px;
         }
-        .nav-buttons a:hover {
+        .nav-buttons a:hover, .auth-buttons a:hover {
             background: #00ffff;
             text-shadow: 0px 0px 10px cyan;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to LifeLike</h1>
-    <p>Choose an option below:</p>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰ Open Sidebar</button>
     
-    <div class="nav-buttons">
-        <a href="chatroom.html">💬 Chatroom</a>
-        <a href="cyclonex.html">🏢 CycloNex Home</a>
-        <a href="signup.html">📝 Sign Up</a>
-        <a href="login.html">🔑 Log In</a>
+    <div class="sidebar" id="sidebar">
+        <button onclick="toggleSidebar()">✖ Close Sidebar</button>
+        <div id="sidebar-content">
+            <p id="user-section">
+                <a href="signup.html">📝 Sign Up</a> <br>
+                <a href="login.html">🔑 Log In</a>
+            </p>
+        </div>
     </div>
+    
+    <div class="main-content">
+        <h1>Welcome to LifeLike</h1>
+        <p>Choose an option below:</p>
+        
+        <div class="nav-buttons">
+            <a href="#" id="chatroom-link">💬 Chatroom</a>
+            <a href="cyclonex.html">🏢 CycloNex Home</a>
+        </div>
+        
+        <div class="auth-buttons">
+            <a href="signup.html">📝 Sign Up</a>
+            <a href="login.html">🔑 Log In</a>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("open");
+        }
+        
+        window.onload = function() {
+            let loggedIn = localStorage.getItem("lifelike_logged_in");
+            let userSection = document.getElementById("user-section");
+            let chatroomLink = document.getElementById("chatroom-link");
+
+            if (loggedIn === "true") {
+                let username = localStorage.getItem("lifelike_username") || "User";
+                userSection.innerHTML = `<p><strong>${username}</strong></p>
+                    <button onclick="logout()">Logout</button>`;
+                chatroomLink.href = "chatroom.html";
+            } else {
+                chatroomLink.href = "#";
+                chatroomLink.onclick = function() {
+                    alert("You must be logged in to access the chatroom.");
+                };
+            }
+        };
+        
+        function logout() {
+            localStorage.removeItem("lifelike_logged_in");
+            localStorage.removeItem("lifelike_username");
+            location.reload();
+        }
+    </script>
 </body>
 </html>
