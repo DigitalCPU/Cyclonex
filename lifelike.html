@@ -11,75 +11,15 @@
             color: white;
             text-align: center;
         }
-        .container {
-            margin-top: 50px;
-        }
-        input, button, textarea {
-            margin: 10px;
-            padding: 10px;
-            width: 250px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            margin: 10px auto;
-            border: 2px solid cyan;
-        }
-        .drop-area {
-            border: 2px dashed cyan;
-            padding: 20px;
-            margin: 20px auto;
-            cursor: pointer;
-            width: 200px;
-        }
-        .friends-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .friend {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: gray;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: 2px solid cyan;
-        }
-        .friend img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .friend-popup {
-            display: none;
-            position: fixed;
-            background: #222;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid cyan;
-            color: white;
-            text-align: center;
-        }
         .nav-buttons a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
+            display: block;
+            margin: 20px auto;
+            padding: 15px;
             background: cyan;
             color: black;
             text-decoration: none;
             border-radius: 5px;
+            width: 200px;
         }
         .nav-buttons a:hover {
             background: #00ffff;
@@ -88,97 +28,14 @@
     </style>
 </head>
 <body>
-    <h2>My Profile</h2>
-    <div class="container">
-        <img id="profile-pic" src="default-avatar.png" alt="Profile Picture">
-        <div class="drop-area" id="dropArea">Drag & Drop Profile Picture Here</div>
-        <input type="file" id="upload-pic" accept="image/png, image/jpeg, image/gif, image/webp, image/svg+xml">
-        <input type="text" id="username" placeholder="Enter Username">
-        <textarea id="bio" placeholder="Enter your bio..."></textarea>
-        <button onclick="saveProfile()">Save Profile</button>
-        <button onclick="logout()">Logout</button>
-    </div>
-
-    <h3>Friends List</h3>
-    <div class="friends-list" id="friendsList"></div>
-    <button onclick="seeAllFriends()">See All Friends</button>
-    <br><a href="inbox.html">📩 Inbox</a>
-
-    <div class="friend-popup" id="friendPopup">
-        <p>Options:</p>
-        <button onclick="dmFriend()">Direct Message</button>
-        <button onclick="editFriend()">Edit</button>
-        <button onclick="closePopup()">Close</button>
-    </div>
-
-    <!-- Navigation Buttons -->
+    <h1>Welcome to LifeLike</h1>
+    <p>Choose an option below:</p>
+    
     <div class="nav-buttons">
-        <a href="lifelike.html">🏠 Home</a>
         <a href="chatroom.html">💬 Chatroom</a>
+        <a href="cyclonex.html">🏢 CycloNex Home</a>
+        <a href="signup.html">📝 Sign Up</a>
+        <a href="login.html">🔑 Log In</a>
     </div>
-
-    <script>
-        window.onload = function() {
-            if (localStorage.getItem("lifelike_logged_in") !== "true") {
-                alert("You must be logged in to view your profile.");
-                window.location.href = "login.html";
-            }
-            document.getElementById("username").value = localStorage.getItem("lifelike_username") || "";
-            document.getElementById("bio").value = localStorage.getItem("lifelike_bio") || "";
-            let storedPic = localStorage.getItem("lifelike_profile_pic");
-            if (storedPic) {
-                document.getElementById("profile-pic").src = storedPic;
-            }
-            loadFriends();
-        };
-
-        function saveProfile() {
-            let username = document.getElementById("username").value;
-            let bio = document.getElementById("bio").value;
-            localStorage.setItem("lifelike_username", username);
-            localStorage.setItem("lifelike_bio", bio);
-            alert("Profile updated!");
-        }
-
-        function loadFriends() {
-            let friendsList = document.getElementById("friendsList");
-            friendsList.innerHTML = "";
-            for (let i = 0; i < 8; i++) {
-                let friend = document.createElement("div");
-                friend.classList.add("friend");
-                friend.innerHTML = `<img src="default-avatar.png" alt="Friend ${i+1}">`;
-                friend.onclick = () => showFriendOptions(friend);
-                friendsList.appendChild(friend);
-            }
-        }
-
-        function showFriendOptions(friend) {
-            let popup = document.getElementById("friendPopup");
-            popup.style.display = "block";
-            popup.style.top = event.clientY + "px";
-            popup.style.left = event.clientX + "px";
-        }
-
-        function closePopup() {
-            document.getElementById("friendPopup").style.display = "none";
-        }
-
-        function dmFriend() {
-            alert("Direct Message feature coming soon!");
-        }
-
-        function editFriend() {
-            alert("Edit friend feature coming soon!");
-        }
-
-        function seeAllFriends() {
-            alert("See all friends feature coming soon!");
-        }
-
-        function logout() {
-            localStorage.removeItem("lifelike_logged_in");
-            window.location.href = "login.html";
-        }
-    </script>
 </body>
 </html>
