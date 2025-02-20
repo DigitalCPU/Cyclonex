@@ -59,22 +59,24 @@
             width: 100%;
             text-align: center;
             animation: fadeIn 1s ease-in;
+            padding: 20px;
         }
-        .toggle-btn {
-            position: fixed;
-            top: 10px;
-            left: 10px;
+        .nav-buttons a {
+            display: block;
+            margin: 20px auto;
+            padding: 15px;
             background: cyan;
             color: black;
-            border: none;
-            padding: 12px;
+            text-decoration: none;
             border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
+            width: 250px;
+            font-weight: bold;
+            transition: 0.3s;
         }
-        .toggle-btn:hover {
+        .nav-buttons a:hover {
             background: #00ffff;
-            box-shadow: 0px 0px 10px cyan;
+            text-shadow: 0px 0px 10px cyan;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -93,27 +95,23 @@
     <div class="main-content">
         <h1>Welcome to LifeLike</h1>
         <p>Your gateway to a connected digital experience.</p>
-        <script>
+        
+        <div class="nav-buttons">
+            <a href="chatroom.html" id="chatroom-link">Chatroom</a>
+            <a href="https://digitalcpu.github.io/Cyclonex/index.html">CycloNex Home</a>
+        </div>
+    </div>
+    
+    <script>
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("open");
-        }
-        
-        function setCookie(name, value, days = 365) {
-            let expires = "";
-            if (days) {
-                let date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
         }
         
         function getCookie(name) {
             let nameEQ = name + "=";
             let ca = document.cookie.split(';');
             for(let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                let c = ca[i].trim();
                 if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
             }
             return null;
@@ -125,23 +123,28 @@
             let profilePic = getCookie("lifelike_profile_pic");
             let userSection = document.getElementById("user-section");
             let profileImage = document.getElementById("profile-pic");
+            let chatroomLink = document.getElementById("chatroom-link");
             
             if (loggedIn === "true") {
                 userSection.innerHTML = `<p><strong>${username || "User"}</strong></p>
                     <button onclick="logout()">Logout</button>`;
                 profileImage.src = profilePic || "default-avatar.png";
                 profileImage.style.display = "block";
-                window.location.href = "profile.html";
+                chatroomLink.href = "chatroom.html";
+            } else {
+                chatroomLink.href = "#";
+                chatroomLink.onclick = function() {
+                    alert("You must be logged in to access the chatroom.");
+                };
             }
         };
         
         function logout() {
-            setCookie("lifelike_logged_in", "", -1);
-            setCookie("lifelike_username", "", -1);
-            setCookie("lifelike_profile_pic", "", -1);
+            document.cookie = "lifelike_logged_in=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "lifelike_username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "lifelike_profile_pic=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             location.reload();
         }
-        </script>
-    </div>
+    </script>
 </body>
 </html>
