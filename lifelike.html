@@ -123,14 +123,35 @@
             document.getElementById("sidebar").classList.toggle("open");
         }
         
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        
         window.onload = function() {
-            let loggedIn = localStorage.getItem("lifelike_logged_in");
+            let loggedIn = getCookie("lifelike_logged_in");
+            let username = getCookie("lifelike_username");
             let userSection = document.getElementById("user-section");
             let chatroomLink = document.getElementById("chatroom-link");
-
+            
             if (loggedIn === "true") {
-                let username = localStorage.getItem("lifelike_username") || "User";
-                userSection.innerHTML = `<p><strong>${username}</strong></p>
+                userSection.innerHTML = `<p><strong>${username || "User"}</strong></p>
                     <button onclick="logout()">Logout</button>`;
                 chatroomLink.href = "chatroom.html";
             } else {
@@ -142,8 +163,8 @@
         };
         
         function logout() {
-            localStorage.removeItem("lifelike_logged_in");
-            localStorage.removeItem("lifelike_username");
+            setCookie("lifelike_logged_in", "", -1);
+            setCookie("lifelike_username", "", -1);
             location.reload();
         }
     </script>
