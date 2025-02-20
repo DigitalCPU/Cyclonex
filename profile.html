@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - LifeLike</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        input, button, textarea {
+            margin: 10px;
+            padding: 10px;
+            width: 250px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 10px auto;
+            border: 2px solid cyan;
+        }
+    </style>
+</head>
+<body>
+    <h2>My Profile</h2>
+    <div class="container">
+        <img id="profile-pic" src="default-avatar.png" alt="Profile Picture">
+        <input type="file" id="upload-pic" accept="image/*">
+        <input type="text" id="username" placeholder="Enter Username">
+        <textarea id="bio" placeholder="Enter your bio..."></textarea>
+        <button onclick="saveProfile()">Save Profile</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        // Load profile data from local storage
+        window.onload = function() {
+            if (localStorage.getItem("lifelike_logged_in") !== "true") {
+                alert("You must be logged in to view your profile.");
+                window.location.href = "login.html";
+            }
+
+            document.getElementById("username").value = localStorage.getItem("lifelike_username") || "";
+            document.getElementById("bio").value = localStorage.getItem("lifelike_bio") || "";
+
+            let storedPic = localStorage.getItem("lifelike_profile_pic");
+            if (storedPic) {
+                document.getElementById("profile-pic").src = storedPic;
+            }
+        };
+
+        // Save profile data
+        function saveProfile() {
+            let username = document.getElementById("username").value;
+            let bio = document.getElementById("bio").value;
+
+            localStorage.setItem("lifelike_username", username);
+            localStorage.setItem("lifelike_bio", bio);
+            alert("Profile updated!");
+        }
+
+        // Upload profile picture
+        document.getElementById("upload-pic").addEventListener("change", function(event) {
+            let reader = new FileReader();
+            reader.onload = function() {
+                localStorage.setItem("lifelike_profile_pic", reader.result);
+                document.getElementById("profile-pic").src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem("lifelike_logged_in");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
