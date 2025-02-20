@@ -9,7 +9,6 @@
             font-family: Arial, sans-serif;
             background-color: #0a0a0a;
             color: white;
-            text-align: center;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,13 +16,14 @@
         .sidebar {
             width: 250px;
             height: 100vh;
-            background: #111;
+            background: linear-gradient(180deg, #111, #222);
             position: fixed;
             left: -250px;
             top: 0;
             transition: 0.3s;
             padding-top: 20px;
             text-align: center;
+            box-shadow: 2px 0px 10px rgba(0, 255, 255, 0.3);
         }
         .sidebar.open {
             left: 0;
@@ -31,22 +31,25 @@
         .sidebar button {
             display: block;
             margin: 10px auto;
-            padding: 10px;
+            padding: 12px;
             width: 80%;
             background: cyan;
             color: black;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: 0.2s;
         }
         .sidebar button:hover {
             background: #00ffff;
+            box-shadow: 0px 0px 10px cyan;
         }
         .main-content {
             flex: 1;
             margin-left: 250px;
             width: 100%;
             text-align: center;
+            animation: fadeIn 1s ease-in;
         }
         .toggle-btn {
             position: fixed;
@@ -55,12 +58,14 @@
             background: cyan;
             color: black;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 12px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: 0.2s;
         }
         .toggle-btn:hover {
             background: #00ffff;
+            box-shadow: 0px 0px 10px cyan;
         }
         .nav-buttons a, .auth-buttons a {
             display: block;
@@ -69,12 +74,19 @@
             background: cyan;
             color: black;
             text-decoration: none;
-            border-radius: 5px;
-            width: 200px;
+            border-radius: 8px;
+            width: 250px;
+            font-weight: bold;
+            transition: 0.3s;
         }
         .nav-buttons a:hover, .auth-buttons a:hover {
             background: #00ffff;
             text-shadow: 0px 0px 10px cyan;
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -85,24 +97,24 @@
         <button onclick="toggleSidebar()">✖ Close Sidebar</button>
         <div id="sidebar-content">
             <p id="user-section">
-                <a href="https://digitalcpu.github.io/Cyclonex/register.html">📝 Sign Up</a> <br>
-                <a href="https://digitalcpu.github.io/Cyclonex/login.html">🔑 Log In</a>
+                <a href="https://digitalcpu.github.io/Cyclonex/register.html">Sign Up</a> <br>
+                <a href="https://digitalcpu.github.io/Cyclonex/login.html">Log In</a>
             </p>
         </div>
     </div>
     
     <div class="main-content">
         <h1>Welcome to LifeLike</h1>
-        <p>Choose an option below:</p>
+        <p>Your gateway to a connected digital experience.</p>
         
         <div class="nav-buttons">
-            <a href="#" id="chatroom-link">💬 Chatroom</a>
-            <a href="https://digitalcpu.github.io/Cyclonex/index.html">🏢 CycloNex Home</a>
+            <a href="#" id="chatroom-link">Chatroom</a>
+            <a href="https://digitalcpu.github.io/Cyclonex/index.html">CycloNex Home</a>
         </div>
         
         <div class="auth-buttons">
-            <a href="https://digitalcpu.github.io/Cyclonex/register.html">📝 Sign Up</a>
-            <a href="https://digitalcpu.github.io/Cyclonex/login.html">🔑 Log In</a>
+            <a href="https://digitalcpu.github.io/Cyclonex/register.html">Sign Up</a>
+            <a href="https://digitalcpu.github.io/Cyclonex/login.html">Log In</a>
         </div>
     </div>
     
