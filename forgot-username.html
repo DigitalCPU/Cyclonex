@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieve Username - LifeLike</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+        }
+        .container {
+            max-width: 350px;
+            margin: auto;
+            padding: 20px;
+            background: #222;
+            border-radius: 8px;
+            box-shadow: 0 0 10px cyan;
+        }
+        .username-list {
+            text-align: left;
+            margin-top: 20px;
+            padding: 10px;
+            background: #333;
+            border-radius: 5px;
+            box-shadow: 0 0 10px cyan;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            background: cyan;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background: #00ffff;
+            box-shadow: 0px 0px 10px cyan;
+        }
+        a {
+            color: cyan;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Retrieve Username</h2>
+    <div class="container">
+        <button onclick="showUsernames()">Show My Usernames</button>
+        <div id="usernames" class="username-list" style="display: none;"></div>
+        <p><a href="login.html">Return to Login</a></p>
+    </div>
+
+    <script>
+        function showUsernames() {
+            let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
+            let usernameList = document.getElementById("usernames");
+
+            if (users.length === 0) {
+                usernameList.innerHTML = "<p>No registered users found.</p>";
+            } else {
+                usernameList.innerHTML = "<h3>Registered Usernames:</h3><ul>" +
+                    users.map(user => `<li>${user.username}</li>`).join("") +
+                    "</ul>";
+            }
+
+            usernameList.style.display = "block";
+        }
+    </script>
+</body>
+</html>
