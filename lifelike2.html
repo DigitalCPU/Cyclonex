@@ -33,23 +33,30 @@
             <img src="default-avatar.png" alt="Profile Picture">
             <h3 id="username-display">Not logged in</h3>
         </div>
+
+        <h4>Add a Friend</h4>
+        <input type="text" id="friend-email" placeholder="Friend's Email">
+        <button onclick="addFriend()">Add Friend</button>
+
         <h4>Friends</h4>
-        <div id="friends-list"></div> <!-- Updated friends list -->
+        <div id="friends-list"></div> <!-- Friends list will be dynamically updated -->
+
         <h4>Followers</h4>
         <div id="followers-list"></div>
+
         <a href="#">Inbox</a>
         <a href="#">Profile Settings</a>
         <a href="#">Hardware Settings</a>
+
         <button id="logout-btn" onclick="logout()">Log Out</button>
     </aside>
 
+    <!-- Firebase SDK -->
     <script type="module">
-        // Import Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // 🔹 Replace with your Firebase config
         const firebaseConfig = {
             apiKey: "YOUR-API-KEY",
             authDomain: "YOUR-PROJECT.firebaseapp.com",
@@ -59,13 +66,12 @@
             appId: "YOUR-APP-ID"
         };
 
-        // 🔹 Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
     </script>
 
-    <!-- 🔹 Load script.js for login & sidebar functionality -->
+    <!-- 🔹 Load script.js for sidebar, login, and friend system -->
     <script src="script.js" type="module"></script>
 
 </body>
