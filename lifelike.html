@@ -34,28 +34,7 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.3);
-            z-index: -1; /* Places it behind text and images */
-        }
-        
-        /* Navigation and authentication buttons styling */
-        .nav-buttons a, .auth-buttons a {
-            display: block;
-            margin: 20px auto;
-            padding: 15px;
-            background: rgba(0, 255, 255, 0.5);
-            color: black;
-            text-decoration: none;
-            border-radius: 8px;
-            width: 300px;
-            font-weight: bold;
-            transition: 0.3s;
-            text-align: center;
-            box-shadow: 0px 0px 10px cyan;
-        }
-        .nav-buttons a:hover, .auth-buttons a:hover {
-            background: rgba(0, 255, 255, 0.8);
-            text-shadow: 0px 0px 15px teal;
-            transform: scale(1.05);
+            z-index: -1;
         }
         
         /* Sidebar styling */
@@ -90,23 +69,58 @@
             background: rgba(0, 255, 255, 0.8);
             box-shadow: 0px 0px 10px cyan;
         }
-        
-        /* Footer link */
-        .footer-link {
-            position: absolute;
-            bottom: 10px;
-            color: cyan;
-            text-decoration: none;
-            font-size: 16px;
-            text-shadow: 0px 0px 10px cyan;
+        .profile-section {
+            text-align: center;
+            padding: 15px;
+            border-bottom: 1px solid cyan;
         }
-        .footer-link:hover {
-            text-shadow: 0px 0px 15px teal;
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: gray;
+            display: block;
+            margin: 0 auto;
+        }
+        .friends-section {
+            padding: 10px;
+            text-align: center;
+        }
+        .friend-slot {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 255, 0.2);
+            margin: 5px;
+            display: inline-block;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+        }
+        .friend-slot:hover::after {
+            content: "DM | History | F/Settings";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: cyan;
+        }
+        .sidebar-links {
+            margin-top: 10px;
+        }
+        .sidebar-links a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: cyan;
+        }
+        .sidebar-links a:hover {
+            text-shadow: 0px 0px 5px cyan;
         }
     </style>
 </head>
 <body>
-    <!-- Background diffusion effect -->
     <div class="background-diffusion"></div>
     
     <div class="main-content">
@@ -130,28 +144,34 @@
     </div>
     
     <div class="sidebar" id="sidebar">
+        <div class="profile-section">
+            <img class="profile-pic" src="default-avatar.png" alt="Profile Picture">
+            <p id="user-name">Anonymous User</p>
+        </div>
+        <div class="friends-section">
+            <p>Friends</p>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+        </div>
+        <div class="sidebar-links">
+            <a href="#">See All Friends</a>
+            <a href="#">Inbox</a>
+            <a href="#">Profile Settings</a>
+            <a href="#">Hardware Settings</a>
+        </div>
         <button onclick="toggleSidebar()">✖ Close Sidebar</button>
     </div>
     
     <script>
-        /* Function to toggle the sidebar open and closed */
         function toggleSidebar() {
             let sidebar = document.getElementById("sidebar");
-            if (sidebar.classList.contains("open")) {
-                sidebar.classList.remove("open");
-            } else {
-                sidebar.classList.add("open");
-            }
-        }
-        
-        /* Function to check if the user is logged in before going live */
-        function goLive() {
-            let loggedIn = localStorage.getItem("lifelike_logged_in");
-            if (loggedIn === "true") {
-                window.location.href = "golive.html";
-            } else {
-                alert("You must be logged in first to go live.");
-            }
+            sidebar.classList.toggle("open");
         }
     </script>
     
