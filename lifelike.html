@@ -37,6 +37,30 @@
             z-index: -1;
         }
         
+        /* Button styling */
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container a {
+            display: block;
+            width: 300px;
+            padding: 15px;
+            margin: 10px auto;
+            background: rgba(0, 255, 255, 0.5);
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0px 0px 10px cyan;
+            transition: 0.3s;
+        }
+        .button-container a:hover {
+            background: rgba(0, 255, 255, 0.8);
+            text-shadow: 0px 0px 15px teal;
+            transform: scale(1.05);
+        }
+        
         /* Sidebar styling */
         .sidebar {
             width: 250px;
@@ -69,6 +93,8 @@
             background: rgba(0, 255, 255, 0.8);
             box-shadow: 0px 0px 10px cyan;
         }
+        
+        /* Profile section inside sidebar */
         .profile-section {
             text-align: center;
             padding: 15px;
@@ -130,16 +156,11 @@
         <button class="toggle-btn" onclick="toggleSidebar()" style="width: 300px; margin-top: 20px;">☰ Open Sidebar</button>
         
         <div class="button-container">
-            <div class="auth-buttons">
-                <a href="https://digitalcpu.github.io/Cyclonex/login.html">Log In</a>
-                <a href="https://digitalcpu.github.io/Cyclonex/register.html">Sign Up</a>
-            </div>
-            
-            <div class="nav-buttons">
-                <a href="chatroom.html" id="chatroom-link">Chatroom</a>
-                <a href="#" onclick="goLive()">Go Live Now</a>
-                <a href="about.html">About</a>
-            </div>
+            <a href="https://digitalcpu.github.io/Cyclonex/login.html">Log In</a>
+            <a href="https://digitalcpu.github.io/Cyclonex/register.html">Sign Up</a>
+            <a href="chatroom.html">Chatroom</a>
+            <a href="#" onclick="goLive()">Go Live Now</a>
+            <a href="about.html">About</a>
         </div>
     </div>
     
