@@ -71,76 +71,23 @@
         <a href="chatroom.html">💬 Chatroom</a>
     </div>
 
-    <script>
-        // Load profile data from local storage
-        window.onload = function() {
-            if (localStorage.getItem("lifelike_logged_in") !== "true") {
-                alert("You must be logged in to view your profile.");
-                window.location.href = "login.html";
-            }
+  <script>
+    // Retrieve the logged-in user from localStorage
+    let loggedInUser = JSON.parse(localStorage.getItem("lifelike_loggedin_user"));
 
-            document.getElementById("username").value = localStorage.getItem("lifelike_username") || "";
-            document.getElementById("bio").value = localStorage.getItem("lifelike_bio") || "";
+    if (loggedInUser) {
+        document.getElementById("username-display").textContent = loggedInUser.username;
+        document.getElementById("profile-pic").src = loggedInUser.profilePic;
+    } else {
+        alert("You are not logged in. Redirecting to login page...");
+        window.location.href = "login.html";
+    }
 
-            let storedPic = localStorage.getItem("lifelike_profile_pic");
-            if (storedPic) {
-                document.getElementById("profile-pic").src = storedPic;
-            }
-        };
+    function logout() {
+        localStorage.removeItem("lifelike_loggedin_user");
+        window.location.href = "login.html";
+    }
+</script>
 
-        // Save profile data
-        function saveProfile() {
-            let username = document.getElementById("username").value;
-            let bio = document.getElementById("bio").value;
-
-            localStorage.setItem("lifelike_username", username);
-            localStorage.setItem("lifelike_bio", bio);
-            alert("Profile updated!");
-        }
-
-        // Upload profile picture
-        document.getElementById("upload-pic").addEventListener("change", function(event) {
-            let file = event.target.files[0];
-            handleImageUpload(file);
-        });
-
-        // Drag & Drop Profile Picture Upload
-        const dropArea = document.getElementById("dropArea");
-        dropArea.addEventListener("dragover", (event) => {
-            event.preventDefault();
-            dropArea.style.background = "rgba(0, 255, 255, 0.3)";
-        });
-        dropArea.addEventListener("dragleave", () => {
-            dropArea.style.background = "transparent";
-        });
-        dropArea.addEventListener("drop", (event) => {
-            event.preventDefault();
-            dropArea.style.background = "transparent";
-            
-            let file = event.dataTransfer.files[0];
-            handleImageUpload(file);
-        });
-
-        // Handle Image Upload (including SVG support)
-        function handleImageUpload(file) {
-            if (file && (file.type.startsWith("image/") || file.type === "image/svg+xml")) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    localStorage.setItem("lifelike_profile_pic", e.target.result);
-                    document.getElementById("profile-pic").src = e.target.result;
-                    alert("Profile picture updated!");
-                };
-                reader.readAsDataURL(file);
-            } else {
-                alert("Please upload a valid image file (PNG, JPG, GIF, WEBP, or SVG). ");
-            }
-        }
-
-        // Logout function
-        function logout() {
-            localStorage.removeItem("lifelike_logged_in");
-            window.location.href = "login.html";
-        }
-    </script>
 </body>
 </html>
