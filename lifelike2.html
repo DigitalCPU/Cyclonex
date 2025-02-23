@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLike - Social Media</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to LifeLike</h1>
+        <button onclick="toggleSidebar()">☰ Open Sidebar</button>
+        <nav>
+            <button onclick="alert('Login functionality coming soon!')">Log In</button>
+            <button onclick="alert('Sign Up functionality coming soon!')">Sign Up</button>
+            <button onclick="alert('Chatrooms coming soon!')">Chatrooms</button>
+            <button onclick="alert('Go Live feature coming soon!')">Go Live Now</button>
+            <button onclick="alert('About Page coming soon!')">About</button>
+        </nav>
+    </header>
+
+    <aside id="sidebar" class="hidden">
+        <button onclick="toggleSidebar()">❌ Close Sidebar</button>
+        <div class="profile">
+            <img src="default-avatar.png" alt="Profile Picture">
+            <h3>Username</h3>
+        </div>
+        <h4>Friends</h4>
+        <div class="friends-list">
+            <div class="friend-slot">Friend 1</div>
+            <div class="friend-slot">Friend 2</div>
+            <div class="friend-slot">Friend 3</div>
+            <a href="#">See All Friends</a>
+        </div>
+        <h4>Followers</h4>
+        <div class="followers-list">
+            <div class="follower-slot">Follower 1</div>
+            <div class="follower-slot">Follower 2</div>
+            <div class="follower-slot">Follower 3</div>
+            <a href="#">Show Followers</a>
+        </div>
+        <a href="#">Inbox</a>
+        <a href="#">Profile Settings</a>
+        <a href="#">Hardware Settings</a>
+    </aside>
+
+    <script src="script.js"></script> <!-- This loads your sidebar script -->
+</body>
+</html>
 
