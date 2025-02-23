@@ -3,8 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeLike - Social Media</title>
+    <title>LifeLike   v1.1 - Social Media</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1f1f1f;
+            padding: 15px;
+            text-align: center;
+        }
+        button {
+            background-color: #333;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #auth-container {
+            background-color: #1f1f1f;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            width: 300px;
+            margin: auto;
+        }
+        input {
+            background-color: #333;
+            color: #ffffff;
+            border: 1px solid #444;
+            padding: 10px;
+            margin: 5px;
+            width: calc(100% - 20px);
+        }
+        aside {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            padding: 15px;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            overflow-y: auto;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        a {
+            color: #4caf50;
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,7 +81,6 @@
         </nav>
     </header>
 
-    <!-- Login & Signup Form -->
     <div id="auth-container">
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Password">
@@ -39,7 +100,7 @@
         <button onclick="addFriend()">Add Friend</button>
 
         <h4>Friends</h4>
-        <div id="friends-list"></div> <!-- Friends list will be dynamically updated -->
+        <div id="friends-list"></div>
 
         <h4>Followers</h4>
         <div id="followers-list"></div>
@@ -51,7 +112,6 @@
         <button id="logout-btn" onclick="logout()">Log Out</button>
     </aside>
 
-    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -71,8 +131,6 @@
         const db = getFirestore(app);
     </script>
 
-    <!-- 🔹 Load script.js for sidebar, login, and friend system -->
     <script src="script.js" type="module"></script>
-
 </body>
 </html>
