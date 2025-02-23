@@ -88,6 +88,8 @@
         
         <div class="link-container">
             <p>Don't have an account? <a href="register.html">Sign up</a></p>
+            <p><a href="forgot-password.html">Forgot Password?</a></p>
+            <p><a href="forgot-username.html">Forgot Username?</a></p>
             <p><a href="lifelike.html">Return to LifeLike Home</a></p>
         </div>
     </div>
@@ -98,28 +100,28 @@
             input.type = (input.type === "password") ? "text" : "password";
         }
 
- function loginUser() {
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+        function loginUser() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
 
-    if (!username || !password) {
-        alert("Please enter both username and password.");
-        return;
-    }
+            if (!username || !password) {
+                alert("Please enter both username and password.");
+                return;
+            }
 
-    let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
+            let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
 
-    // Find user in stored array
-    let foundUser = users.find(user => user.username === username && user.password === password);
+            // Find user in stored array
+            let foundUser = users.find(user => user.username === username && user.password === password);
 
-    if (foundUser) {
-        alert("Login successful!");
-        localStorage.setItem("lifelike_loggedin_user", JSON.stringify(foundUser));
-        window.location.href = "profile.html";  // Redirect to profile page
-    } else {
-        alert("Invalid username or password.");
-    }
-}
+            if (foundUser) {
+                alert("Login successful!");
+                localStorage.setItem("lifelike_loggedin_user", JSON.stringify(foundUser));
+                window.location.href = "profile.html";  // Redirect to profile page
+            } else {
+                alert("Invalid username or password.");
+            }
+        }
     </script>
 </body>
 </html>
