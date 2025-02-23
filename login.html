@@ -101,24 +101,32 @@
         }
 
         function loginUser() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value; // If applicable
 
-            if (!username || !password) {
-                alert("Please enter both username and password.");
-                return;
-            }
+    if (!username) {
+        alert("Please enter a username.");
+        return;
+    }
 
-            let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
+    // Retrieve stored profiles or create an empty object
+    let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
 
-            // Find user in stored array
-            let foundUser = users.find(user => user.username === username && user.password === password);
+    // If the user does not exist, create a new profile
+    if (!profiles[username]) {
+        profiles[username] = { bio: "", profilePic: "default-avatar.png" };
+        localStorage.setItem("profiles", JSON.stringify(profiles));
+    }
 
-            if (foundUser) {
-                alert("Login successful!");
-                localStorage.setItem("lifelike_loggedin_user", JSON.stringify(foundUser));
-                window.location.href = "profile.html";  // Redirect to profile page
-            } else {
+    // Store the currently logged-in user
+    localStorage.setItem("currentUser", username);
+    
+    // Notify success and redirect
+    alert("Login successful!");
+    window.location.href = "profile.html";
+}
+
+       else {
                 alert("Invalid username or password.");
             }
         }
