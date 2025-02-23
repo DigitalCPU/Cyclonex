@@ -11,64 +11,62 @@
         <h1>Welcome to LifeLike</h1>
         <button onclick="toggleSidebar()">☰ Open Sidebar</button>
         <nav>
-            <button onclick="alert('Login functionality coming soon!')">Log In</button>
-            <button onclick="alert('Sign Up functionality coming soon!')">Sign Up</button>
+            <button onclick="login()">Log In</button>
+            <button onclick="signup()">Sign Up</button>
             <button onclick="alert('Chatrooms coming soon!')">Chatrooms</button>
             <button onclick="alert('Go Live feature coming soon!')">Go Live Now</button>
             <button onclick="alert('About Page coming soon!')">About</button>
         </nav>
     </header>
 
+    <!-- Login & Signup Form -->
+    <div id="auth-container">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signup()">Sign Up</button>
+        <button onclick="login()">Log In</button>
+    </div>
+
     <aside id="sidebar" class="hidden">
         <button onclick="toggleSidebar()">❌ Close Sidebar</button>
         <div class="profile">
             <img src="default-avatar.png" alt="Profile Picture">
             <h3 id="username-display">Not logged in</h3>
-
         </div>
         <h4>Friends</h4>
-        <div class="friends-list">
-            <div class="friend-slot">Friend 1</div>
-            <div class="friend-slot">Friend 2</div>
-            <div class="friend-slot">Friend 3</div>
-            <a href="#">See All Friends</a>
-        </div>
+        <div id="friends-list"></div> <!-- Updated friends list -->
         <h4>Followers</h4>
-        <div class="followers-list">
-            <div class="follower-slot">Follower 1</div>
-            <div class="follower-slot">Follower 2</div>
-            <div class="follower-slot">Follower 3</div>
-            <a href="#">Show Followers</a>
-        </div>
+        <div id="followers-list"></div>
         <a href="#">Inbox</a>
         <a href="#">Profile Settings</a>
         <a href="#">Hardware Settings</a>
-<!-- Log Out Button -->
-<button id="logout-btn" onclick="logout()">Log Out</button>
-        
+        <button id="logout-btn" onclick="logout()">Log Out</button>
     </aside>
 
-   <script type="module">
-  // Import Firebase
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  // 🔹 Replace with your Firebase config from Project Settings
-  const firebaseConfig = {
-    apiKey: "YOUR-API-KEY",
-    authDomain: "YOUR-PROJECT.firebaseapp.com",
-    projectId: "YOUR-PROJECT-ID",
-    storageBucket: "YOUR-PROJECT.appspot.com",
-    messagingSenderId: "YOUR-SENDER-ID",
-    appId: "YOUR-APP-ID"
-  };
+        // 🔹 Replace with your Firebase config
+        const firebaseConfig = {
+            apiKey: "YOUR-API-KEY",
+            authDomain: "YOUR-PROJECT.firebaseapp.com",
+            projectId: "YOUR-PROJECT-ID",
+            storageBucket: "YOUR-PROJECT.appspot.com",
+            messagingSenderId: "YOUR-SENDER-ID",
+            appId: "YOUR-APP-ID"
+        };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth();
-  const db = getFirestore();
-</script>
+        // 🔹 Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+    </script>
+
+    <!-- 🔹 Load script.js for login & sidebar functionality -->
+    <script src="script.js" type="module"></script>
+
 </body>
 </html>
-
