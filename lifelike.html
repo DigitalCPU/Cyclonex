@@ -22,14 +22,19 @@
             text-align: center;
         }
         
-        /* Background diffusion effect behind buttons */
-        .button-container {
-            width: 300px;
-            padding: 20px;
+        /* Background diffusion effect - full height, centered, beneath text/images */
+        .background-diffusion {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 100vh;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
+            border-radius: 20px;
             box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.3);
+            z-index: -1; /* Places it behind text and images */
         }
         
         /* Sidebar styles */
@@ -54,7 +59,7 @@
             display: block;
             margin: 10px auto;
             padding: 12px;
-            width: 80%;
+            width: 300px; /* Matches button box width */
             background: rgba(0, 255, 255, 0.5);
             color: black;
             border: none;
@@ -101,7 +106,10 @@
     </style>
 </head>
 <body>
-    <button class="toggle-btn" onclick="toggleSidebar()">☰ Open Sidebar</button>
+    <!-- Background diffusion effect -->
+    <div class="background-diffusion"></div>
+    
+    <button class="toggle-btn" onclick="toggleSidebar()" style="width: 300px;">☰ Open Sidebar</button>
     
     <div class="sidebar" id="sidebar">
         <button onclick="toggleSidebar()">✖ Close Sidebar</button>
