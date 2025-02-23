@@ -3,142 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeLike - Profile</title>
+    <title>Login - LifeLike</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #0a0a0a;
             color: white;
             text-align: center;
+            margin: 0;
+            padding: 50px;
         }
         .container {
-            margin-top: 50px;
-        }
-        input, button, textarea {
-            margin: 10px;
-            padding: 10px;
-            width: 250px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            margin: 10px auto;
-            border: 2px solid cyan;
-        }
-        .drop-area {
-            border: 2px dashed cyan;
+            max-width: 350px;
+            margin: auto;
             padding: 20px;
-            margin: 20px auto;
-            cursor: pointer;
-            width: 200px;
+            background: #222;
+            border-radius: 8px;
+            box-shadow: 0 0 10px cyan;
         }
-        .nav-buttons a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
+        .input-container {
+            position: relative;
+            margin: 15px 0;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #333;
+            color: white;
+            text-align: left;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: cyan;
+            font-size: 18px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
             background: cyan;
             color: black;
-            text-decoration: none;
-            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
         }
-        .nav-buttons a:hover {
+        button:hover {
             background: #00ffff;
-            text-shadow: 0px 0px 10px cyan;
+            box-shadow: 0px 0px 10px cyan;
+        }
+        .link-container {
+            margin-top: 20px;
+        }
+        a {
+            color: cyan;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h2>My Profile</h2>
+    <h2>Login</h2>
     <div class="container">
-        <img id="profile-pic" src="default-avatar.png" alt="Profile Picture">
-        <div class="drop-area" id="dropArea">Drag & Drop Profile Picture Here</div>
-        <input type="file" id="upload-pic" accept="image/jpeg, image/bmp, image/gif, image/webp, image/svg+xml">
-        <input type="text" id="username" placeholder="Enter Username">
-        <textarea id="bio" placeholder="Enter your bio..."></textarea>
-        <button onclick="saveProfile()">Save Profile</button>
-        <button onclick="logout()">Logout</button>
-        <button onclick="loadProfileList()">Switch Profile</button>
+        <div class="input-container">
+            <input type="text" id="username" placeholder="Enter Username" required>
+        </div>
+        <div class="input-container">
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <span class="toggle-password" onclick="togglePassword('password')">👁</span>
+        </div>
+        <button onclick="loginUser()">Log In</button>
+        
+        <div class="link-container">
+            <p>Don't have an account? <a href="register.html">Sign up</a></p>
+            <p><a href="lifelike.html">Return to LifeLike Home</a></p>
+        </div>
     </div>
 
-    <div id="profile-switch" style="display: none;">
-        <h3>Switch Profile</h3>
-        <div id="profile-list"></div>
-    </div>
-
-    <div class="nav-buttons">
-        <a href="lifelike.html">🏠 Home</a>
-        <a href="chatroom.html">💬 Chatroom</a>
-    </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
-        let currentUser = localStorage.getItem("currentUser");
-        console.log("Current User Retrieved:", currentUser);
-
-        if (!currentUser) {
-            alert("No user logged in. Redirecting to login page...");
-            window.location.href = "login.html";
-            return;
+    <script>
+        function togglePassword(id) {
+            let input = document.getElementById(id);
+            input.type = (input.type === "password") ? "text" : "password";
         }
 
-        if (profiles[currentUser]) {
-            document.getElementById("username").value = currentUser;
-            document.getElementById("bio").value = profiles[currentUser].bio || "";
-            document.getElementById("profile-pic").src = profiles[currentUser].profilePic || "default-avatar.png";
-        } else {
-            alert("User data not found. Redirecting to login...");
-            window.location.href = "login.html";
+        function loginUser() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            let storedUsername = localStorage.getItem("lifelike_username");
+            let storedPassword = localStorage.getItem("lifelike_password");
+
+            if (username === storedUsername && password === storedPassword) {
+                alert("Login successful!");
+                window.location.href = "lifelike.html";
+            } else {
+                alert("Invalid username or password.");
+            }
         }
-    });
-
-    function saveProfile() {
-        let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
-        let currentUser = localStorage.getItem("currentUser");
-        if (!currentUser) return;
-
-        if (!profiles[currentUser]) {
-            profiles[currentUser] = { bio: "", profilePic: "default-avatar.png" };
-        }
-
-        let bio = document.getElementById("bio").value;
-        let profilePic = document.getElementById("profile-pic").src;
-        profiles[currentUser] = { bio, profilePic };
-
-        localStorage.setItem("profiles", JSON.stringify(profiles));
-        alert("Profile saved successfully!");
-    }
-
-    function logout() {
-        localStorage.removeItem("currentUser");
-        window.location.href = "login.html";
-    }
-
-    function loadProfileList() {
-        let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
-        let profileListDiv = document.getElementById("profile-list");
-        profileListDiv.innerHTML = "";
-
-        Object.keys(profiles).forEach(username => {
-            let profileItem = document.createElement("button");
-            profileItem.textContent = username;
-            profileItem.onclick = function() { switchUser(username); };
-            profileListDiv.appendChild(profileItem);
-        });
-
-        document.getElementById("profile-switch").style.display = "block";
-    }
-
-    function switchUser(username) {
-        localStorage.setItem("currentUser", username);
-        window.location.href = "profile.html";
-    }
-  </script>
+    </script>
 </body>
 </html>
