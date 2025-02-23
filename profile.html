@@ -77,19 +77,27 @@
     </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
-        let currentUser = localStorage.getItem("currentUser");
 
-        if (currentUser && profiles[currentUser]) {
-            document.getElementById("username").value = currentUser;
-            document.getElementById("bio").value = profiles[currentUser].bio || "";
-            document.getElementById("profile-pic").src = profiles[currentUser].profilePic || "default-avatar.png";
-        } else {
-            alert("No user logged in. Redirecting to login page...");
-            window.location.href = "login.html";
-        }
-    });
+ document.addEventListener("DOMContentLoaded", function () {
+    let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+    let currentUser = localStorage.getItem("currentUser");
+
+    if (!currentUser) {
+        alert("No user logged in. Redirecting to login page...");
+        window.location.href = "login.html";
+        return;
+    }
+
+    if (profiles[currentUser]) {
+        document.getElementById("username").value = currentUser;
+        document.getElementById("bio").value = profiles[currentUser].bio || "";
+        document.getElementById("profile-pic").src = profiles[currentUser].profilePic || "default-avatar.png";
+    } else {
+        alert("User data not found. Redirecting to login...");
+        window.location.href = "login.html";
+    }
+});
+     
 
     function saveProfile() {
         let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
