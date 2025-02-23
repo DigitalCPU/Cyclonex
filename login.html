@@ -52,16 +52,6 @@
     <p><a href="lifelike.html">Return to LifeLike Home</a></p>
 
     <script>
-        function setCookie(name, value, days = 365) {
-            let expires = "";
-            if (days) {
-                let date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
-
         function loginUser() {
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
@@ -71,11 +61,11 @@
                 return;
             }
 
-            // Simulating login validation (should be handled via a backend in real cases)
-            if (username === "testuser" && password === "password123") {
-                setCookie("lifelike_logged_in", "true", 365);
-                setCookie("lifelike_username", username, 365);
-                setCookie("lifelike_profile_pic", "default-avatar.png", 365);
+            // Retrieve stored credentials from localStorage
+            let storedUsername = localStorage.getItem("lifelike_username");
+            let storedPassword = localStorage.getItem("lifelike_password");
+
+            if (username === storedUsername && password === storedPassword) {
                 alert("Login successful!");
                 window.location.href = "https://digitalcpu.github.io/Cyclonex/profile.html";
             } else {
