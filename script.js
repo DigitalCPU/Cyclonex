@@ -1,160 +1,72 @@
-// 🔹 Import Firebase
-import { 
-    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLike - Social Media</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to LifeLike</h1>
+        <button onclick="toggleSidebar()">☰ Open Sidebar</button>
+        <nav>
+            <button onclick="login()">Log In</button>
+            <button onclick="signup()">Sign Up</button>
+            <button onclick="alert('Chatrooms coming soon!')">Chatrooms</button>
+            <button onclick="alert('Go Live feature coming soon!')">Go Live Now</button>
+            <button onclick="alert('About Page coming soon!')">About</button>
+        </nav>
+    </header>
 
-import { 
-    getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion, collection, query, where, getDocs 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    <!-- Login & Signup Form -->
+    <div id="auth-container">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signup()">Sign Up</button>
+        <button onclick="login()">Log In</button>
+    </div>
 
-// 🔹 Initialize Firebase
-const auth = getAuth();
-const db = getFirestore();
+    <aside id="sidebar" class="hidden">
+        <button onclick="toggleSidebar()">❌ Close Sidebar</button>
+        <div class="profile">
+            <img src="default-avatar.png" alt="Profile Picture">
+            <h3 id="username-display">Not logged in</h3>
+        </div>
+        <h4>Friends</h4>
+        <div id="friends-list"></div> <!-- Updated friends list -->
+        <h4>Followers</h4>
+        <div id="followers-list"></div>
+        <a href="#">Inbox</a>
+        <a href="#">Profile Settings</a>
+        <a href="#">Hardware Settings</a>
+        <button id="logout-btn" onclick="logout()">Log Out</button>
+    </aside>
 
-// 🔹 Signup Function
-async function signup() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let username = prompt("Enter a username:"); // Ask for a username
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-            let user = userCredential.user;
-            console.log("User signed up:", user);
+        // 🔹 Replace with your Firebase config
+        const firebaseConfig = {
+            apiKey: "YOUR-API-KEY",
+            authDomain: "YOUR-PROJECT.firebaseapp.com",
+            projectId: "YOUR-PROJECT-ID",
+            storageBucket: "YOUR-PROJECT.appspot.com",
+            messagingSenderId: "YOUR-SENDER-ID",
+            appId: "YOUR-APP-ID"
+        };
 
-            // 🔹 Store user profile in Firestore
-            await setDoc(doc(db, "users", user.uid), {
-                username: username,
-                email: user.email,
-                friends: []
-            });
+        // 🔹 Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+    </script>
 
-            alert("Account created successfully!");
-        })
-        .catch(error => {
-            console.error("Signup Error:", error.message);
-            alert(error.message);
-        });
-}
+    <!-- 🔹 Load script.js for login & sidebar functionality -->
+    <script src="script.js" type="module"></script>
 
-// 🔹 Login Function
-async function login() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            let user = userCredential.user;
-            console.log("User logged in:", user);
-            alert("Login successful!");
-        })
-        .catch(error => {
-            console.error("Login Error:", error.message);
-            alert(error.message);
-        });
-}
-
-// 🔹 Logout Function
-async function logout() {
-    signOut(auth)
-        .then(() => {
-            console.log("User logged out");
-            alert("Logged out successfully!");
-        })
-        .catch(error => {
-            console.error("Logout Error:", error.message);
-        });
-}
-
-// 🔹 Update Sidebar with Logged-in User's Info
-function updateUserInfo() {
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            let userDoc = await getDoc(doc(db, "users", user.uid));
-
-            if (userDoc.exists()) {
-                let userData = userDoc.data();
-                document.getElementById("username-display").innerText = userData.username;
-            } else {
-                document.getElementById("username-display").innerText = "No username found";
-            }
-        } else {
-            document.getElementById("username-display").innerText = "Not logged in";
-        }
-    });
-}
-
-// 🔹 Run function when page loads
-updateUserInfo();
-
-// 🔹 Add Friend Function
-async function addFriend() {
-    let friendEmail = document.getElementById("friend-email").value;
-    let user = auth.currentUser;
-
-    if (!user) {
-        alert("You must be logged in!");
-        return;
-    }
-
-    // 🔍 Find the friend in Firestore by email
-    const usersRef = collection(db, "users");
-    const q = query(usersRef, where("email", "==", friendEmail));
-    const querySnapshot = await getDocs(q);
-
-    if (querySnapshot.empty) {
-        alert("Friend not found!");
-        return;
-    }
-
-    let friendDoc = querySnapshot.docs[0];
-    let friendId = friendDoc.id;
-
-    // 🔹 Add friend to the user's friends list
-    await updateDoc(doc(db, "users", user.uid), {
-        friends: arrayUnion(friendId)
-    });
-
-    alert("Friend added!");
-}
-
-// 🔹 Update Friends List in Sidebar
-async function updateFriendsList() {
-    let user = auth.currentUser;
-    if (!user) return;
-
-    let userDoc = await getDoc(doc(db, "users", user.uid));
-    if (!userDoc.exists()) return;
-
-    let userData = userDoc.data();
-    let friendsContainer = document.getElementById("friends-list");
-
-    friendsContainer.innerHTML = ""; // Clear previous list
-
-    for (let friendId of userData.friends) {
-        let friendDoc = await getDoc(doc(db, "users", friendId));
-        if (friendDoc.exists()) {
-            let friendData = friendDoc.data();
-            let friendElement = document.createElement("div");
-            friendElement.innerText = friendData.username;
-            friendsContainer.appendChild(friendElement);
-        }
-    }
-}
-
-// 🔹 Update friends list when user logs in
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        updateFriendsList();
-    }
-});
-
-// 🔹 Sidebar Toggle Function (Keep this at the bottom)
-function toggleSidebar() {
-    let sidebar = document.getElementById("sidebar");
-    if (sidebar.style.transform === "translateX(0px)") {
-        sidebar.style.transform = "translateX(-250px)"; // Hide sidebar
-    } else {
-        sidebar.style.transform = "translateX(0px)"; // Show sidebar
-    }
-}
+</body>
+</html>
