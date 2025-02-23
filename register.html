@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - LifeLike</title>
+    <title>Register - LifeLike</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,19 +31,58 @@
             cursor: pointer;
             color: cyan;
         }
+        .hidden {
+            display: none;
+        }
+        .popup {
+            background-color: black;
+            color: cyan;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            box-shadow: 0px 0px 15px cyan;
+        }
+        .popup a {
+            color: cyan;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .popup a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <h2>Login</h2>
+    <h2>Register</h2>
     <div class="container">
-        <input type="text" id="login-username" placeholder="Enter Username" required>
-        <div class="password-container">
-            <input type="password" id="login-password" placeholder="Enter Password" required>
-            <span class="toggle-password" onclick="togglePassword('login-password')">👁</span>
+        <input type="text" id="username" placeholder="Enter Username" required>
+        <button onclick="checkUsername()">Check Availability</button>
+        
+        <div id="password-section" class="hidden">
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <span class="toggle-password" onclick="togglePassword('password')">👁</span>
+            </div>
+            <div class="password-container">
+                <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+                <span class="toggle-password" onclick="togglePassword('confirm-password')">👁</span>
+            </div>
+            <button onclick="registerUser()">Sign Up</button>
         </div>
-        <button onclick="loginUser()">Log In</button>
-        <p>Don't have an account? <a href="register.html">Register</a></p>
+
+        <p>Already have an account? <a href="login.html">Log in</a></p>
     </div>
+
+    <div id="popup" class="popup">
+        <p>Registration successful! Click here to <a href="login.html">Log In</a></p>
+    </div>
+
+    <p><a href="lifelike.html">Return to LifeLike Home</a></p>
 
     <script>
         function togglePassword(id) {
@@ -51,22 +90,41 @@
             input.type = (input.type === "password") ? "text" : "password";
         }
 
-        function loginUser() {
-            let username = document.getElementById("login-username").value;
-            let password = document.getElementById("login-password").value;
+        function checkUsername() {
+            let username = document.getElementById("username").value;
+            if (!username) {
+                alert("Please enter a username.");
+                return;
+            }
 
-            let storedUsername = localStorage.getItem("lifelike_username");
-            let storedPassword = localStorage.getItem("lifelike_password");
-
-            if (username === storedUsername && password === storedPassword) {
-                alert("Login successful! Redirecting...");
-                window.location.href = "lifelike.html";  // Redirect to LifeLike Home
+            // Simulating username check (in a real system, this would query a database)
+            if (localStorage.getItem("lifelike_username") === username) {
+                alert("Username already taken. Try another.");
             } else {
-                alert("Incorrect username or password.");
+                alert("Username is available.");
+                document.getElementById("password-section").classList.remove("hidden");
             }
         }
-    </script>
 
-    <p><a href="lifelike.html">Return to LifeLike Home</a></p>
+        function registerUser() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirm-password").value;
+
+            if (!username || !password || !confirmPassword) {
+                alert("Please fill in all fields.");
+                return;
+            }
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            localStorage.setItem("lifelike_username", username);
+            localStorage.setItem("lifelike_password", password);
+
+            document.getElementById("popup").style.display = "block"; // Show glowing popup
+        }
+    </script>
 </body>
 </html>
