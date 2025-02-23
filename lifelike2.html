@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeLike   v1.3 - Social Media</title>
+    <title>LifeLike - Social Media</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -56,6 +56,11 @@
             height: 100%;
             overflow-y: auto;
             box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        aside.show {
+            transform: translateX(0);
         }
         a {
             color: #4caf50;
@@ -88,7 +93,7 @@
         <button onclick="login()">Log In</button>
     </div>
 
-    <aside id="sidebar" class="hidden">
+    <aside id="sidebar">
         <button onclick="toggleSidebar()">❌ Close Sidebar</button>
         <div class="profile">
             <img src="default-avatar.png" alt="Profile Picture">
@@ -112,25 +117,11 @@
         <button id="logout-btn" onclick="logout()">Log Out</button>
     </aside>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "YOUR-API-KEY",
-            authDomain: "YOUR-PROJECT.firebaseapp.com",
-            projectId: "YOUR-PROJECT-ID",
-            storageBucket: "YOUR-PROJECT.appspot.com",
-            messagingSenderId: "YOUR-SENDER-ID",
-            appId: "YOUR-APP-ID"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+    <script type="module" src="script.js" defer></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("show");
+        }
     </script>
-
-    <script src="script.js" type="module"></script>
 </body>
 </html>
