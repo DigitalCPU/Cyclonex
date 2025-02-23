@@ -27,13 +27,14 @@
         }
         input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 18px;
             background: #333;
             color: white;
             text-align: left;
+            box-sizing: border-box;
         }
         .toggle-password {
             position: absolute;
@@ -42,19 +43,20 @@
             transform: translateY(-50%);
             cursor: pointer;
             color: cyan;
-            font-size: 18px;
+            font-size: 20px;
         }
         button {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 18px;
             background: cyan;
             color: black;
             font-weight: bold;
             cursor: pointer;
             margin-top: 15px;
+            box-sizing: border-box;
         }
         button:hover {
             background: #00ffff;
@@ -90,30 +92,26 @@
         </div>
     </div>
 
-   <script>
-    function loginUser() {
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
-
-        if (!username || !password) {
-            alert("Please enter both username and password.");
-            return;
+    <script>
+        function togglePassword(id) {
+            let input = document.getElementById(id);
+            input.type = (input.type === "password") ? "text" : "password";
         }
 
-        let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
+        function loginUser() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
 
-        // Find the user in the array
-        let foundUser = users.find(user => user.username === username && user.password === password);
+            let storedUsername = localStorage.getItem("lifelike_username");
+            let storedPassword = localStorage.getItem("lifelike_password");
 
-        if (foundUser) {
-            alert("Login successful!");
-            localStorage.setItem("lifelike_loggedin_user", JSON.stringify(foundUser));
-            window.location.href = "profile.html";  // Redirect to profile page
-        } else {
-            alert("Invalid username or password.");
+            if (username === storedUsername && password === storedPassword) {
+                alert("Login successful!");
+                window.location.href = "lifelike.html";
+            } else {
+                alert("Invalid username or password.");
+            }
         }
-    }
-</script>
-
+    </script>
 </body>
 </html>
