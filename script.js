@@ -1,8 +1,13 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+// 🔹 Import Firebase
+import { 
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+import { 
+    getFirestore, doc, setDoc 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-
+// 🔹 Initialize Firebase
 const auth = getAuth();
 const db = getFirestore();
 
@@ -60,8 +65,23 @@ async function logout() {
         });
 }
 
+// 🔹 Update Sidebar with Logged-in User's Email
+function updateUserInfo() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is logged in
+            document.getElementById("username-display").innerText = user.email; // Show email
+        } else {
+            // User is logged out
+            document.getElementById("username-display").innerText = "Not logged in";
+        }
+    });
+}
 
+// 🔹 Run function to check user login status when page loads
+updateUserInfo();
 
+// 🔹 Sidebar Toggle Function (Keep this at the bottom)
 function toggleSidebar() {
     let sidebar = document.getElementById("sidebar");
     if (sidebar.style.transform === "translateX(0px)") {
