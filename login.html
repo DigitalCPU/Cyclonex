@@ -98,20 +98,28 @@
             input.type = (input.type === "password") ? "text" : "password";
         }
 
-        function loginUser() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
+ function loginUser() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
-            let storedUsername = localStorage.getItem("lifelike_username");
-            let storedPassword = localStorage.getItem("lifelike_password");
+    if (!username || !password) {
+        alert("Please enter both username and password.");
+        return;
+    }
 
-            if (username === storedUsername && password === storedPassword) {
-                alert("Login successful!");
-                window.location.href = "lifelike.html";
-            } else {
-                alert("Invalid username or password.");
-            }
-        }
+    let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
+
+    // Find user in stored array
+    let foundUser = users.find(user => user.username === username && user.password === password);
+
+    if (foundUser) {
+        alert("Login successful!");
+        localStorage.setItem("lifelike_loggedin_user", JSON.stringify(foundUser));
+        window.location.href = "profile.html";  // Redirect to profile page
+    } else {
+        alert("Invalid username or password.");
+    }
+}
     </script>
 </body>
 </html>
