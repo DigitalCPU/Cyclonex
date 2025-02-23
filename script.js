@@ -24,12 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const followersList = document.getElementById("followers-list");
 
     window.toggleSidebar = function() {
-        sidebar.classList.toggle("hidden");
+        if (sidebar) {
+            sidebar.classList.toggle("hidden");
+        } else {
+            console.error("Sidebar element not found");
+        }
     };
 
     window.signup = async function() {
-        const email = emailInput.value;
-        const password = passwordInput.value;
+        const email = emailInput?.value;
+        const password = passwordInput?.value;
         if (email && password) {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -49,17 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.login = async function() {
-        const email = emailInput.value;
-        const password = passwordInput.value;
+        const email = emailInput?.value;
+        const password = passwordInput?.value;
         if (email && password) {
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-                usernameDisplay.textContent = email.split("@")[0];
+                if (usernameDisplay) usernameDisplay.textContent = email.split("@")[0];
                 const userDoc = await getDoc(doc(db, "users", user.uid));
                 if (userDoc.exists()) {
-                    friendsList.innerHTML = userDoc.data().friends.map(friend => `<p>${friend}</p>`).join('');
-                    followersList.innerHTML = userDoc.data().followers.map(follower => `<p>${follower}</p>`).join('');
+                    if (friendsList) friendsList.innerHTML = userDoc.data().friends.map(friend => `<p>${friend}</p>`).join('');
+                    if (followersList) followersList.innerHTML = userDoc.data().followers.map(follower => `<p>${follower}</p>`).join('');
                 }
                 alert("Logged in successfully!");
             } catch (error) {
@@ -73,9 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
     window.logout = async function() {
         try {
             await signOut(auth);
-            usernameDisplay.textContent = "Not logged in";
-            friendsList.innerHTML = "";
-            followersList.innerHTML = "";
+            if (usernameDisplay) usernameDisplay.textContent = "Not logged in";
+            if (friendsList) friendsList.innerHTML = "";
+            if (followersList) followersList.innerHTML = "";
             alert("Logged out successfully.");
         } catch (error) {
             alert("Error: " + error.message);
