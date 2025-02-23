@@ -55,42 +55,24 @@
         <a href="lifelike.html">🏠 Home</a>
     </div>
 
-    <script>
-        // Restrict access if not logged in
-        if (localStorage.getItem("lifelike_logged_in") !== "true") {
-            alert("You must be logged in to access the chatroom.");
-            window.location.href = "login.html";
-        }
+   <script>
+    function loginUser() {
+        let username = document.getElementById("login-username").value;
+        let password = document.getElementById("login-password").value;
 
-        function sendMessage() {
-            let message = document.getElementById("message").value;
-            if (message.trim() !== "") {
-                let chatbox = document.getElementById("chatbox");
-                chatbox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
-                document.getElementById("message").value = "";
-                autoReply();
-            }
-        }
+        let storedUsername = localStorage.getItem("lifelike_username");
+        let storedPassword = localStorage.getItem("lifelike_password");
 
-        function autoReply() {
-            setTimeout(() => {
-                let chatbox = document.getElementById("chatbox");
-                let botMessages = [
-                    "Hello!",
-                    "How’s your day going?",
-                    "LifeLike is all about real-time interaction!",
-                    "What do you think about this project?",
-                    "Ask me anything!"
-                ];
-                let randomMsg = botMessages[Math.floor(Math.random() * botMessages.length)];
-                chatbox.innerHTML += `<p><strong>Bot:</strong> ${randomMsg}</p>`;
-            }, 1000);
+        if (username === storedUsername && password === storedPassword) {
+            localStorage.setItem("lifelike_logged_in", "true");
+            localStorage.setItem("lifelike_username", username);
+            alert("Login successful! Redirecting...");
+            window.location.href = "chatroom.html";  // Redirect to Chatroom after login
+        } else {
+            alert("Incorrect username or password.");
         }
+    }
+</script>
 
-        function logout() {
-            localStorage.removeItem("lifelike_logged_in");
-            window.location.href = "login.html";
-        }
-    </script>
 </body>
 </html>
