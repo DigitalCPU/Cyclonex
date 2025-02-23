@@ -85,46 +85,57 @@
     <p><a href="lifelike.html">Return to LifeLike Home</a></p>
 
     <script>
-        function togglePassword(id) {
-            let input = document.getElementById(id);
-            input.type = (input.type === "password") ? "text" : "password";
+    function checkUsername() {
+        let username = document.getElementById("username").value;
+        let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
+
+        if (!username) {
+            alert("Please enter a username.");
+            return;
         }
 
-        function checkUsername() {
-            let username = document.getElementById("username").value;
-            if (!username) {
-                alert("Please enter a username.");
-                return;
-            }
+        // Check if the username is already taken
+        let userExists = users.some(user => user.username === username);
 
-            // Simulating username check (in a real system, this would query a database)
-            if (localStorage.getItem("lifelike_username") === username) {
-                alert("Username already taken. Try another.");
-            } else {
-                alert("Username is available.");
-                document.getElementById("password-section").classList.remove("hidden");
-            }
+        if (userExists) {
+            alert("Username already taken. Try another.");
+        } else {
+            alert("Username is available.");
+            document.getElementById("password-section").classList.remove("hidden");
+        }
+    }
+
+    function registerUser() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirm-password").value;
+
+        if (!username || !password || !confirmPassword) {
+            alert("Please fill in all fields.");
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
         }
 
-        function registerUser() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            let confirmPassword = document.getElementById("confirm-password").value;
+        let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
 
-            if (!username || !password || !confirmPassword) {
-                alert("Please fill in all fields.");
-                return;
-            }
-            if (password !== confirmPassword) {
-                alert("Passwords do not match.");
-                return;
-            }
-
-            localStorage.setItem("lifelike_username", username);
-            localStorage.setItem("lifelike_password", password);
-
-            document.getElementById("popup").style.display = "block"; // Show glowing popup
+        // Check again if username exists
+        if (users.some(user => user.username === username)) {
+            alert("Username already taken. Try another.");
+            return;
         }
-    </script>
+
+        // Add new user to the users array
+        users.push({ username: username, password: password, profilePic: "default-avatar.png" });
+
+        // Save updated users array to localStorage
+        localStorage.setItem("lifelike_users", JSON.stringify(users));
+
+        document.getElementById("popup").style.display = "block"; // Show glowing popup
+    }
+</script>
+
 </body>
 </html>
