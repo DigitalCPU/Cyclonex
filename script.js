@@ -4,7 +4,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import { 
-    getFirestore, doc, setDoc 
+    getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion, collection, query, where, getDocs 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // 🔹 Initialize Firebase
@@ -15,6 +15,7 @@ const db = getFirestore();
 async function signup() {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
+    let username = prompt("Enter a username:"); // Ask for a username
 
     createUserWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
@@ -23,9 +24,9 @@ async function signup() {
 
             // 🔹 Store user profile in Firestore
             await setDoc(doc(db, "users", user.uid), {
+                username: username,
                 email: user.email,
-                friends: [],
-                profileSettings: {}
+                friends: []
             });
 
             alert("Account created successfully!");
@@ -65,21 +66,88 @@ async function logout() {
         });
 }
 
-// 🔹 Update Sidebar with Logged-in User's Email
+// 🔹 Update Sidebar with Logged-in User's Info
 function updateUserInfo() {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
         if (user) {
-            // User is logged in
-            document.getElementById("username-display").innerText = user.email; // Show email
+            let userDoc = await getDoc(doc(db, "users", user.uid));
+
+            if (userDoc.exists()) {
+                let userData = userDoc.data();
+                document.getElementById("username-display").innerText = userData.username;
+            } else {
+                document.getElementById("username-display").innerText = "No username found";
+            }
         } else {
-            // User is logged out
             document.getElementById("username-display").innerText = "Not logged in";
         }
     });
 }
 
-// 🔹 Run function to check user login status when page loads
+// 🔹 Run function when page loads
 updateUserInfo();
+
+// 🔹 Add Friend Function
+async function addFriend() {
+    let friendEmail = document.getElementById("friend-email").value;
+    let user = auth.currentUser;
+
+    if (!user) {
+        alert("You must be logged in!");
+        return;
+    }
+
+    // 🔍 Find the friend in Firestore by email
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("email", "==", friendEmail));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+        alert("Friend not found!");
+        return;
+    }
+
+    let friendDoc = querySnapshot.docs[0];
+    let friendId = friendDoc.id;
+
+    // 🔹 Add friend to the user's friends list
+    await updateDoc(doc(db, "users", user.uid), {
+        friends: arrayUnion(friendId)
+    });
+
+    alert("Friend added!");
+}
+
+// 🔹 Update Friends List in Sidebar
+async function updateFriendsList() {
+    let user = auth.currentUser;
+    if (!user) return;
+
+    let userDoc = await getDoc(doc(db, "users", user.uid));
+    if (!userDoc.exists()) return;
+
+    let userData = userDoc.data();
+    let friendsContainer = document.getElementById("friends-list");
+
+    friendsContainer.innerHTML = ""; // Clear previous list
+
+    for (let friendId of userData.friends) {
+        let friendDoc = await getDoc(doc(db, "users", friendId));
+        if (friendDoc.exists()) {
+            let friendData = friendDoc.data();
+            let friendElement = document.createElement("div");
+            friendElement.innerText = friendData.username;
+            friendsContainer.appendChild(friendElement);
+        }
+    }
+}
+
+// 🔹 Update friends list when user logs in
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        updateFriendsList();
+    }
+});
 
 // 🔹 Sidebar Toggle Function (Keep this at the bottom)
 function toggleSidebar() {
