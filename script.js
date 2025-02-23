@@ -1,8 +1,8 @@
 function toggleSidebar() {
     let sidebar = document.getElementById("sidebar");
-    if (sidebar.classList.contains("hidden")) {
-        sidebar.classList.remove("hidden");
+    if (sidebar.style.transform === "translateX(0px)") {
+        sidebar.style.transform = "translateX(-250px)"; // Hide sidebar
     } else {
-        sidebar.classList.add("hidden");
+        sidebar.style.transform = "translateX(0px)"; // Show sidebar
     }
 }
