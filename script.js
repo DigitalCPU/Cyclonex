@@ -3,12 +3,12 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "YOUR-API-KEY",
-    authDomain: "YOUR-PROJECT.firebaseapp.com",
-    projectId: "YOUR-PROJECT-ID",
-    storageBucket: "YOUR-PROJECT.appspot.com",
-    messagingSenderId: "YOUR-SENDER-ID",
-    appId: "YOUR-APP-ID"
+    apiKey: "AIzaSyDHi0cT2Pk_aymI2yFr_TrFQJfMWfrZ6C8",
+    authDomain: "lifelike-cd485.firebaseapp.com",
+    projectId: "lifelike-cd485",
+    storageBucket: "lifelike-cd485.firebasestorage.app",
+    messagingSenderId: "621008241447",
+    appId: "1:621008241447:web:3920e1234de6383fcd5f02"
 };
 
 const app = initializeApp(firebaseConfig);
