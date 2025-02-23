@@ -58,6 +58,39 @@
             transform: scale(1.05);
         }
         
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, #111, #222);
+            position: fixed;
+            left: -250px;
+            top: 0;
+            transition: left 0.3s;
+            padding-top: 20px;
+            text-align: center;
+            box-shadow: 2px 0px 10px rgba(0, 255, 255, 0.3);
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar button {
+            display: block;
+            margin: 10px auto;
+            padding: 12px;
+            width: 250px;
+            background: rgba(0, 255, 255, 0.5);
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .sidebar button:hover {
+            background: rgba(0, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px cyan;
+        }
+        
         /* Footer link */
         .footer-link {
             position: absolute;
@@ -96,7 +129,21 @@
         </div>
     </div>
     
+    <div class="sidebar" id="sidebar">
+        <button onclick="toggleSidebar()">✖ Close Sidebar</button>
+    </div>
+    
     <script>
+        /* Function to toggle the sidebar open and closed */
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            if (sidebar.classList.contains("open")) {
+                sidebar.classList.remove("open");
+            } else {
+                sidebar.classList.add("open");
+            }
+        }
+        
         /* Function to check if the user is logged in before going live */
         function goLive() {
             let loggedIn = localStorage.getItem("lifelike_logged_in");
@@ -108,6 +155,6 @@
         }
     </script>
     
-    <a href="#" class="footer-link">Glowing Footer Link</a>
+    <a href="https://digitalcpu.github.io/Cyclonex/index.html" class="footer-link">CycloNex</a>
 </body>
 </html>
