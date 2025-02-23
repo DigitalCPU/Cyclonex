@@ -14,60 +14,98 @@
             padding: 50px;
         }
         .container {
-            max-width: 300px;
+            max-width: 350px;
             margin: auto;
             padding: 20px;
             background: #222;
             border-radius: 8px;
             box-shadow: 0 0 10px cyan;
         }
-        input, button {
-            margin: 10px;
-            padding: 10px;
+        .input-container {
+            position: relative;
+            margin: 15px 0;
+        }
+        input {
             width: 100%;
+            padding: 12px;
             border: none;
             border-radius: 5px;
             font-size: 16px;
+            background: #333;
+            color: white;
+            text-align: left;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: cyan;
+            font-size: 18px;
         }
         button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
             background: cyan;
             color: black;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 15px;
         }
         button:hover {
             background: #00ffff;
             box-shadow: 0px 0px 10px cyan;
+        }
+        .link-container {
+            margin-top: 20px;
+        }
+        a {
+            color: cyan;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <h2>Login</h2>
     <div class="container">
-        <input type="text" id="username" placeholder="Enter Username" required>
-        <input type="password" id="password" placeholder="Enter Password" required>
+        <div class="input-container">
+            <input type="text" id="username" placeholder="Enter Username" required>
+        </div>
+        <div class="input-container">
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <span class="toggle-password" onclick="togglePassword('password')">👁</span>
+        </div>
         <button onclick="loginUser()">Log In</button>
-        <p>Don't have an account? <a href="https://digitalcpu.github.io/Cyclonex/register.html">Sign up</a></p>
+        
+        <div class="link-container">
+            <p>Don't have an account? <a href="register.html">Sign up</a></p>
+            <p><a href="lifelike.html">Return to LifeLike Home</a></p>
+        </div>
     </div>
-    <p><a href="lifelike.html">Return to LifeLike Home</a></p>
 
     <script>
+        function togglePassword(id) {
+            let input = document.getElementById(id);
+            input.type = (input.type === "password") ? "text" : "password";
+        }
+
         function loginUser() {
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
 
-            if (!username || !password) {
-                alert("Please enter both username and password.");
-                return;
-            }
-
-            // Retrieve stored credentials from localStorage
             let storedUsername = localStorage.getItem("lifelike_username");
             let storedPassword = localStorage.getItem("lifelike_password");
 
             if (username === storedUsername && password === storedPassword) {
                 alert("Login successful!");
-                window.location.href = "https://digitalcpu.github.io/Cyclonex/profile.html";
+                window.location.href = "lifelike.html";
             } else {
                 alert("Invalid username or password.");
             }
