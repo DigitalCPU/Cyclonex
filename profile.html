@@ -58,36 +58,107 @@
     <div class="container">
         <img id="profile-pic" src="default-avatar.png" alt="Profile Picture">
         <div class="drop-area" id="dropArea">Drag & Drop Profile Picture Here</div>
-        <input type="file" id="upload-pic" accept="image/png, image/jpeg, image/gif, image/webp, image/svg+xml">
+        <input type="file" id="upload-pic" accept="image/jpeg, image/bmp, image/gif, image/webp, image/svg+xml">
         <input type="text" id="username" placeholder="Enter Username">
         <textarea id="bio" placeholder="Enter your bio..."></textarea>
         <button onclick="saveProfile()">Save Profile</button>
         <button onclick="logout()">Logout</button>
+        <button onclick="loadProfileList()">Switch Profile</button>
     </div>
 
-    <!-- Navigation Buttons -->
+    <div id="profile-switch" style="display: none;">
+        <h3>Switch Profile</h3>
+        <div id="profile-list"></div>
+    </div>
+
     <div class="nav-buttons">
         <a href="lifelike.html">🏠 Home</a>
         <a href="chatroom.html">💬 Chatroom</a>
     </div>
 
   <script>
-    // Retrieve the logged-in user from localStorage
-    let loggedInUser = JSON.parse(localStorage.getItem("lifelike_loggedin_user"));
+    document.addEventListener("DOMContentLoaded", function () {
+        let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+        let currentUser = localStorage.getItem("currentUser");
 
-    if (loggedInUser) {
-        document.getElementById("username-display").textContent = loggedInUser.username;
-        document.getElementById("profile-pic").src = loggedInUser.profilePic;
-    } else {
-        alert("You are not logged in. Redirecting to login page...");
-        window.location.href = "login.html";
+        if (currentUser && profiles[currentUser]) {
+            document.getElementById("username").value = currentUser;
+            document.getElementById("bio").value = profiles[currentUser].bio || "";
+            document.getElementById("profile-pic").src = profiles[currentUser].profilePic || "default-avatar.png";
+        } else {
+            alert("No user logged in. Redirecting to login page...");
+            window.location.href = "login.html";
+        }
+    });
+
+    function saveProfile() {
+        let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+        let currentUser = localStorage.getItem("currentUser");
+        if (!currentUser) return;
+
+        let bio = document.getElementById("bio").value;
+        let profilePic = document.getElementById("profile-pic").src;
+        profiles[currentUser] = { bio, profilePic };
+
+        localStorage.setItem("profiles", JSON.stringify(profiles));
+        alert("Profile saved successfully!");
     }
 
     function logout() {
-        localStorage.removeItem("lifelike_loggedin_user");
+        localStorage.removeItem("currentUser");
         window.location.href = "login.html";
     }
-</script>
 
+    function loadProfileList() {
+        let profiles = JSON.parse(localStorage.getItem("profiles")) || {};
+        let profileListDiv = document.getElementById("profile-list");
+        profileListDiv.innerHTML = "";
+
+        Object.keys(profiles).forEach(username => {
+            let profileItem = document.createElement("button");
+            profileItem.textContent = username;
+            profileItem.onclick = function() { switchUser(username); };
+            profileListDiv.appendChild(profileItem);
+        });
+
+        document.getElementById("profile-switch").style.display = "block";
+    }
+
+    function switchUser(username) {
+        localStorage.setItem("currentUser", username);
+        window.location.href = "profile.html";
+    }
+
+    document.getElementById("upload-pic").addEventListener("change", function(event) {
+        let file = event.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("profile-pic").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    let dropArea = document.getElementById("dropArea");
+    dropArea.addEventListener("dragover", function(e) {
+        e.preventDefault();
+        dropArea.style.borderColor = "#00ffff";
+    });
+    dropArea.addEventListener("dragleave", function() {
+        dropArea.style.borderColor = "cyan";
+    });
+    dropArea.addEventListener("drop", function(e) {
+        e.preventDefault();
+        let file = e.dataTransfer.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("profile-pic").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+  </script>
 </body>
 </html>
