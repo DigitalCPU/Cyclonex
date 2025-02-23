@@ -90,26 +90,30 @@
         </div>
     </div>
 
-    <script>
-        function togglePassword(id) {
-            let input = document.getElementById(id);
-            input.type = (input.type === "password") ? "text" : "password";
+   <script>
+    function loginUser() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+
+        if (!username || !password) {
+            alert("Please enter both username and password.");
+            return;
         }
 
-        function loginUser() {
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
+        let users = JSON.parse(localStorage.getItem("lifelike_users")) || [];
 
-            let storedUsername = localStorage.getItem("lifelike_username");
-            let storedPassword = localStorage.getItem("lifelike_password");
+        // Find the user in the array
+        let foundUser = users.find(user => user.username === username && user.password === password);
 
-            if (username === storedUsername && password === storedPassword) {
-                alert("Login successful!");
-                window.location.href = "lifelike.html";
-            } else {
-                alert("Invalid username or password.");
-            }
+        if (foundUser) {
+            alert("Login successful!");
+            localStorage.setItem("lifelike_loggedin_user", JSON.stringify(foundUser));
+            window.location.href = "profile.html";  // Redirect to profile page
+        } else {
+            alert("Invalid username or password.");
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
