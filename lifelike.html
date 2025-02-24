@@ -7,9 +7,10 @@
     <style>
         /* Styling for the page background, fonts, and alignment */
         body {
-            background: url('lifelike 001.svg') no-repeat center center fixed, #0a0a0a;
+            background: url('lifelike 001.svg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
+            background-color: #0a0a0a;
             color: white;
             margin: 0;
             padding: 0;
@@ -33,7 +34,7 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.3);
-            z-index: 0;
+            z-index: -1;
         }
         
         /* Button styling */
@@ -103,6 +104,9 @@
             border-radius: 50%;
             cursor: pointer;
         }
+        .sidebar-links {
+            margin-top: 10px;
+        }
         .sidebar-links a {
             display: block;
             padding: 8px;
@@ -111,20 +115,6 @@
         }
         .sidebar-links a:hover {
             text-shadow: 0px 0px 5px cyan;
-        }
-        
-        /* Close Sidebar Button */
-        .close-btn {
-            background: transparent;
-            border: none;
-            color: cyan;
-            font-size: 16px;
-            cursor: pointer;
-            text-shadow: 0px 0px 5px cyan;
-            padding: 10px;
-        }
-        .close-btn:hover {
-            text-shadow: 0px 0px 10px cyan;
         }
         
         /* Glowing CycloNex link */
@@ -153,11 +143,11 @@
         <button class="toggle-btn" onclick="toggleSidebar()" style="width: 300px; margin-top: 20px;">☰ Open Sidebar</button>
         
         <div class="button-container">
-            <a href="https://digitalcpu.github.io/lifelike/">Log In</a>
-            <a href="https://digitalcpu.github.io/lifelike/">Sign Up</a>
+            <a href="https://digitalcpu.github.io/Cyclonex/login.html">Log In</a>
+            <a href="https://digitalcpu.github.io/Cyclonex/register.html">Sign Up</a>
             <a href="chatroom.html">Chatroom</a>
             <a href="#" onclick="goLive()">Go Live Now</a>
-            <a href="https://digitalcpu.github.io/Cyclonex/index.html">About</a>
+            <a href="about.html">About</a>
         </div>
     </div>
     
@@ -166,7 +156,26 @@
             <img class="profile-pic" src="default-avatar.png" alt="Profile Picture">
             <p id="user-name">Anonymous User</p>
         </div>
-        <button class="close-btn" onclick="toggleSidebar()">✖ Close Sidebar</button>
+        <div class="friends-section">
+            <p>Friends</p>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <a href="#" class="sidebar-links">All Friends</a>
+        </div>
+        <div class="subscribers-section">
+            <p>Subscribed Viewers</p>
+            <div class="subscriber-slot"></div>
+            <div class="subscriber-slot"></div>
+            <div class="subscriber-slot"></div>
+            <a href="#" class="sidebar-links">All Subscribers</a>
+        </div>
+        <div class="sidebar-links">
+            <a href="#">Inbox</a>
+            <a href="#">Profile Settings</a>
+            <a href="#">Hardware Settings</a>
+        </div>
+        <button onclick="toggleSidebar()">✖ Close Sidebar</button>
     </div>
     
     <a href="https://digitalcpu.github.io/Cyclonex/index.html" class="cyclonex-link">CycloNex</a>
@@ -177,10 +186,6 @@
             if (sidebar) {
                 sidebar.classList.toggle("open");
             }
-        }
-        
-        function goLive() {
-            alert("Live streaming feature is under development.");
         }
     </script>
 </body>
