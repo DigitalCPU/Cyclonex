@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LifeLike - Social Media</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script> 
     <style>
         body {
             background-color: #121212;
@@ -71,11 +72,17 @@
         a:hover {
             text-decoration: underline;
         }
+        .profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to LifeLike</h1>
+        <h1>Welcome to LifeLike 2</h1>
         <button onclick="toggleSidebar()">☰ Open Sidebar</button>
         <nav>
             <button onclick="login()">Log In</button>
@@ -83,6 +90,9 @@
             <button onclick="alert('Chatrooms coming soon!')">Chatrooms</button>
             <button onclick="alert('Go Live feature coming soon!')">Go Live Now</button>
             <button onclick="alert('About Page coming soon!')">About</button>
+            <a href="https://digitalcpu.github.io/Cyclonex/argentix.html">
+                <button>Earn Argentix</button>
+            </a>
         </nav>
     </header>
 
@@ -96,7 +106,8 @@
     <aside id="sidebar">
         <button onclick="toggleSidebar()">❌ Close Sidebar</button>
         <div class="profile">
-            <img src="default-avatar.png" alt="Profile Picture">
+            <img id="profile-pic" src="default-avatar.png" alt="Profile Picture">
+            <button onclick="uploadProfilePicture()">Upload Profile Picture</button>
             <h3 id="username-display">Not logged in</h3>
         </div>
 
