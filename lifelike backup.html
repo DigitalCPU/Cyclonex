@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLike - Home</title>
+    <style>
+        /* Styling for the page background, fonts, and alignment */
+        body {
+            background: url('lifelike 001.svg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        
+        /* Background diffusion effect - full height, centered, beneath text/images */
+        .background-diffusion {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.3);
+            z-index: -1;
+        }
+        
+        /* Button styling */
+        .button-container a {
+            display: block;
+            width: 300px;
+            padding: 15px;
+            margin: 10px auto;
+            background: rgba(0, 255, 255, 0.5);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0px 0px 10px cyan;
+            text-shadow: 0px 0px 8px white;
+            transition: 0.3s;
+        }
+        .button-container a:hover {
+            background: rgba(0, 255, 255, 0.8);
+            text-shadow: 0px 0px 15px white;
+            transform: scale(1.05);
+        }
+        
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, #111, #222);
+            position: fixed;
+            left: -250px;
+            top: 0;
+            transition: left 0.3s ease;
+            padding-top: 20px;
+            text-align: center;
+            box-shadow: 2px 0px 10px rgba(0, 255, 255, 0.3);
+            z-index: 1000;
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar .profile-section {
+            padding: 15px;
+            border-bottom: 1px solid cyan;
+        }
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: gray;
+            display: block;
+            margin: 0 auto;
+        }
+        .friends-section, .subscribers-section {
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .friend-slot, .subscriber-slot {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 255, 0.2);
+            margin: 5px;
+            display: inline-block;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .sidebar-links {
+            margin-top: 10px;
+        }
+        .sidebar-links a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: cyan;
+        }
+        .sidebar-links a:hover {
+            text-shadow: 0px 0px 5px cyan;
+        }
+        
+        /* Glowing CycloNex link */
+        .cyclonex-link {
+            position: absolute;
+            bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: cyan;
+            text-decoration: none;
+            text-shadow: 0px 0px 10px cyan;
+            transition: 0.3s;
+        }
+        .cyclonex-link:hover {
+            text-shadow: 0px 0px 20px cyan;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-diffusion"></div>
+    
+    <div class="main-content">
+        <h1>Welcome to LifeLike</h1>
+        <p>Your gateway to a connected digital experience.</p>
+        
+        <button class="toggle-btn" onclick="toggleSidebar()" style="width: 300px; margin-top: 20px;">☰ Open Sidebar</button>
+        
+        <div class="button-container">
+            <a href="https://digitalcpu.github.io/lifelike/index.html">Log In</a>
+            <a href="https://digitalcpu.github.io/lifelike/index.html">Sign Up</a>
+            <a href="chatroom.html">Chatroom</a>
+            <a href="#" onclick="goLive()">Go Live Now</a>
+            <a href="https://digitalcpu.github.io/Cyclonex/index.html">About</a>
+        </div>
+    </div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="profile-section">
+            <img class="profile-pic" src="default-avatar.png" alt="Profile Picture">
+            <p id="user-name">Anonymous User</p>
+        </div>
+        <div class="friends-section">
+            <p>Friends</p>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <div class="friend-slot"></div>
+            <a href="#" class="sidebar-links">All Friends</a>
+        </div>
+        <div class="subscribers-section">
+            <p>Subscribed Viewers</p>
+            <div class="subscriber-slot"></div>
+            <div class="subscriber-slot"></div>
+            <div class="subscriber-slot"></div>
+            <a href="#" class="sidebar-links">All Subscribers</a>
+        </div>
+        <div class="sidebar-links">
+            <a href="#">Inbox</a>
+            <a href="#">Profile Settings</a>
+            <a href="#">Hardware Settings</a>
+        </div>
+        <button onclick="toggleSidebar()">✖ Close Sidebar</button>
+    </div>
+    
+    <a href="https://digitalcpu.github.io/Cyclonex/index.html" class="cyclonex-link">CycloNex</a>
+    
+    <script>
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            if (sidebar) {
+                sidebar.classList.toggle("open");
+            }
+        }
+    </script>
+</body>
+</html>
