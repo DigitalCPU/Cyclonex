@@ -17,34 +17,38 @@
         .container {
             display: flex;
             justify-content: center;
-            gap: 20px;
             padding: 50px;
-        }
-        .image-container {
             position: relative;
-            width: 300px;
-            height: 200px;
+        }
+        .image-container, .info-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            height: 300px;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
             border: 2px solid #ff7f00;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            border-radius: 15px;
+            flex-direction: column;
+            padding: 20px;
         }
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0.8;
-        }
-        .overlay {
+        .quote-container {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .active {
+            opacity: 1;
         }
         .back-link {
             display: inline-block;
@@ -61,13 +65,14 @@
         }
         .report {
             width: 80%;
+            max-width: 800px;
             margin: 50px auto;
             padding: 20px;
             background: rgba(0, 0, 0, 0.8);
             border-radius: 10px;
             text-align: left;
         }
-        .report h2 {
+        .report h2, .info-container h2 {
             color: #ff7f00;
         }
     </style>
@@ -77,12 +82,17 @@
     <p>Advanced Cybersecurity & Antivirus Protection</p>
     <div class="container">
         <div class="image-container">
-            <img src="image1.jpg" alt="Cybersecurity Image 1">
-            <div class="overlay"></div>
+            <div class="quote-container active">"FireNado provides cutting-edge protection with minimal CPU usage."</div>
+            <div class="quote-container">"Stay secure without the slowdown—FireNado is built for efficiency."</div>
+            <div class="quote-container">"Advanced AI-driven security for the modern digital world."</div>
+            <div class="quote-container">"Seamless, silent, and powerful—FireNado redefines cybersecurity."</div>
         </div>
-        <div class="image-container">
-            <img src="image2.jpg" alt="Cybersecurity Image 2">
-            <div class="overlay"></div>
+    </div>
+    
+    <div class="container">
+        <div class="info-container">
+            <h2>Why Choose FireNado?</h2>
+            <p> <a href='firenado2.html' style='color: #ff7f00; text-decoration: none;'>Learn more</a></p>
         </div>
     </div>
     
@@ -136,6 +146,19 @@
         <p>FireNado is a revolutionary cybersecurity solution designed for peak efficiency, low CPU usage, and non-intrusive operation...</p>
     </div>
     
-    <a class="back-link" href="https://digitalcpu.github.io/Cyclonex/">Back to CycloNex</a>
+    <a class="back-link" href="../cyclonex/index.html">Back to CycloNex</a>
+
+    <script>
+        let quotes = document.querySelectorAll('.quote-container');
+        let index = 0;
+        
+        function showNextQuote() {
+            quotes[index].classList.remove('active');
+            index = (index + 1) % quotes.length;
+            quotes[index].classList.add('active');
+        }
+        
+        setInterval(showNextQuote, 2000);
+    </script>
 </body>
 </html>
