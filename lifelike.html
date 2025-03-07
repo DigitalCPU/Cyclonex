@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeLike - Social Media</title>
+    <title>About LifeLike</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script> 
     <style>
         body {
             background-color: #121212;
@@ -13,126 +12,101 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            text-align: center;
         }
         header {
             background-color: #1f1f1f;
             padding: 15px;
             text-align: center;
         }
-        button {
-            background-color: #333;
-            color: #ffffff;
-            border: none;
-            padding: 10px;
-            margin: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #555;
-        }
-        #auth-container {
-            background-color: #1f1f1f;
+        .container {
+            max-width: 800px;
+            background: linear-gradient(to bottom, #4B0082, #FF00FF);
             padding: 20px;
-            text-align: center;
-            border-radius: 5px;
-            width: 300px;
-            margin: auto;
+            border-radius: 10px;
+            margin: 30px auto;
+            text-align: left;
+            border: 2px solid #00ffff;
+            box-shadow: 0px 0px 15px #00ffff;
+            position: relative;
         }
-        input {
-            background-color: #333;
-            color: #ffffff;
-            border: 1px solid #444;
-            padding: 10px;
-            margin: 5px;
-            width: calc(100% - 20px);
+        .container * {
+            position: relative;
+            z-index: 1;
         }
-        aside {
-            background-color: #1f1f1f;
-            color: #ffffff;
-            padding: 15px;
-            width: 250px;
-            position: fixed;
+        .container::before {
+            content: "";
+            position: absolute;
             top: 0;
-            right: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            overflow-y: auto;
-            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(100%);
+            background: inherit;
+            opacity: 0.3;
+            border-radius: 10px;
+            z-index: 0;
         }
-        aside.show {
-            transform: translateX(0);
+        .links {
+            margin-top: 20px;
         }
-        a {
+        .links a {
             color: #4caf50;
             text-decoration: none;
+            font-weight: bold;
             display: block;
-            padding: 10px 0;
+            margin: 10px 0;
         }
-        a:hover {
+        .links a:hover {
             text-decoration: underline;
-        }
-        .profile img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to LifeLike 2</h1>
-        <button onclick="toggleSidebar()">☰ Open Sidebar</button>
-        <nav>
-            <button onclick="login()">Log In</button>
-            <button onclick="signup()">Sign Up</button>
-            <button onclick="alert('Chatrooms coming soon!')">Chatrooms</button>
-            <button onclick="alert('Go Live feature coming soon!')">Go Live Now</button>
-            <button onclick="alert('About Page coming soon!')">About</button>
-            <a href="https://digitalcpu.github.io/Cyclonex/argentix.html">
-                <button>Earn Argentix</button>
-            </a>
-        </nav>
+        <h1>About LifeLike</h1>
     </header>
-
-    <div id="auth-container">
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="signup()">Sign Up</button>
-        <button onclick="login()">Log In</button>
+    
+    <div class="container">
+        <h2>What is LifeLike?</h2>
+        <p>LifeLike is a social media platform built within the Cyclosphere ecosystem. Unlike traditional social networks, 
+          LifeLike prioritizes live interactions, real-time engagement, and seamless connectivity without the clutter of standard social feeds.</p>
     </div>
 
-    <aside id="sidebar">
-        <button onclick="toggleSidebar()">❌ Close Sidebar</button>
-        <div class="profile">
-            <img id="profile-pic" src="default-avatar.png" alt="Profile Picture">
-            <button onclick="uploadProfilePicture()">Upload Profile Picture</button>
-            <h3 id="username-display">Not logged in</h3>
-        </div>
+    <div class="container">
+        <h2>How LifeLike Operates</h2>
+        <ul>
+            <li><strong>Live-Only</strong> – No pre-recorded posts; everything happens in real-time.</li>
+            <li><strong>Interactive Streams</strong> – Go live instantly and engage with friends and followers.</li>
+            <li><strong>No Privacy</strong> – Ensuring lifelike and real interactions.</li>
+            <li><strong>AI-Powered Content Moderation</strong> – Smart filtering ensures a safe and effective environment.</li>
+        </ul>
+    </div>
 
-        <h4>Add a Friend</h4>
-        <input type="text" id="friend-email" placeholder="Friend's Email">
-        <button onclick="addFriend()">Add Friend</button>
+    <div class="container">
+        <h2>Key Features</h2>
+        <ul>
+            <li>Hot mic functionality dare to be unaware</li>
+          <Li>Record what you see download for keeps</Li>
+            <li>Integrated live polls and Q&A sessions</li>
+            <li>Live chats</li>
+            <li>Friends and followers system</li>
+            <li>Direct messaging (DMs)</li>
+            <li>Forums for community discussions</li>
+            <li>User profiles with customization</li>
+            <li>Ability to create posts</li>
+            <li>Buy and sell marketplace functionality</li>
+        </ul>
+    </div>
 
-        <h4>Friends</h4>
-        <div id="friends-list"></div>
-
-        <h4>Followers</h4>
-        <div id="followers-list"></div>
-
-        <a href="#">Inbox</a>
-        <a href="#">Profile Settings</a>
-        <a href="#">Hardware Settings</a>
-
-        <button id="logout-btn" onclick="logout()">Log Out</button>
-    </aside>
-
-    <script type="module" src="script.js" defer></script>
-    <script>
-        function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("show");
-        }
-    </script>
+    <div class="container">
+        <h2>Future Developments</h2>
+        <p>LifeLike is continuously evolving to provide the best real-time social experience. Upcoming features include full VR integration, 
+         AI-generated content recommendations, and decentralized security solutions.</p>
+    </div>
+    
+    <div class="links">
+        <a href="lifelike backup.html">Back to LifeLike</a>
+        <a href="lifelike2.html">Go to LifeLike 2</a>
+    </div>
 </body>
 </html>
